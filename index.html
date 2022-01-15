@@ -14,67 +14,69 @@
     <script src="js/bootstrap.js"></script>
     
 
-    <title>Turing Mchine</title>
+    <title>Sorting</title>
 </head>
 
 <body>
 
 
-    <h1>Turing machine</h1>
+<h1>Sorting</h1>
 
-    <div class="container center">
-        <div class="row center">
-          <div class="col-1 border cell">
-            1
-          </div>
-          <div class="col-1 border cell">
-            2 
-          </div>
-          <div class="col-1 border cell">
-            3
-          </div>
-          <div class="col-1 border cell">
-            4
-          </div>
-          <div class="col-1 border cell">
-            5 
-          </div>
-          <div class="col-1 border cell">
-            6
-          </div>
-          <div class="col-1 border cell">
-            7
-          </div>
-          <div class="col-1 border cell">
-            8 
-          </div>
-          <div class="col-1 border cell">
-            9
-          </div>
-          <div class="col-1 border cell">
-            10
-          </div>
-          <div class="col-1 border cell">
-            11
-          </div>
-          <div class="col-1 border cell">
-            12
-          </div>
-        </div>
-    </div>
+<div class="container justify-content-center"> 
+
+  <table class="table">
+    <tr id="numbers">
+    </tr>
+    <tr id="buffer">
+    </tr>
+  </table>
+<input type="button" class="btn btn-outline-primary" value="Merge sort">
+</div>
 
 </body>
 
-
 <script>
+let count = 20;
 
+let numbers_array = Array.from(Array(count).keys());
+
+$(document).ready(function() {
+  shuffle(Object.assign([],numbers_array));
+  new_numbers();
+});
+
+
+function shuffle(n_array){
+  if (n_array.length-1>1){
+    let z = Math.floor(Math.random()*(n_array.length-1))
+    n_array[z] = numbers_array[n_array.length-1]
+    numbers_array[n_array.length-1] = numbers_array[z];
+    numbers_array[z] = n_array[z];
+    n_array.pop()
+    shuffle(n_array);
+  }
+  else{
+    return 0;
+  }
+}
+
+
+function sort(){
+
+  
+}
+
+
+
+function new_numbers(){
+  for (let i = 0; i<count; i++){
+    let a = $("<td class='cell border' id='n"+i+"'></td>").text(numbers_array[i]);
+    $("#numbers").append(a);
+    $("#buffer").append("<td class='cell border' id='b"+i+"'></td>");
+  }
+}
 
 
 </script>
-
-
-
-
-
 
 </HTML>
