@@ -30,40 +30,77 @@
     <tr id="buffer">
     </tr>
   </table>
-<input type="button" class="btn btn-outline-primary" value="Merge sort">
+<input id="btn_sort" type="button" class="btn btn-outline-primary" value="Merge sort">
 </div>
 
 </body>
 
 <script>
-let count = 20;
+let count = 6;
 
 let numbers_array = Array.from(Array(count).keys());
+let aaa = '';
+let c =0;
 
 $(document).ready(function() {
-  shuffle(Object.assign([],numbers_array));
+  //shuffle(Object.assign([],numbers_array));
   new_numbers();
+  $("#btn_sort").on('click', ()=>{
+    sort(numbers_array,0,numbers_array.length-1,"0"); //Object.assign([],numbers_array)
+  })
 });
 
 
 function shuffle(n_array){
+  // пока длинна временного массива больше 1
   if (n_array.length-1>1){
+    // получаем случайное число от 1 до последнего индекса массива цифр
     let z = Math.floor(Math.random()*(n_array.length-1))
+    // меняем местами цифры между последней позицией и позицией z
     n_array[z] = numbers_array[n_array.length-1]
     numbers_array[n_array.length-1] = numbers_array[z];
     numbers_array[z] = n_array[z];
-    n_array.pop()
+    // убираем последнюю позицию из временного массива
+    n_array.pop();
+    // передаем в рекурсию
     shuffle(n_array);
   }
   else{
+    // если временный массив - одна цифра, выходим из рекурсии
     return 0;
   }
 }
 
 
-function sort(){
 
-  
+function sort(n_array, start_point, end_point, branch){
+  alert (start_point + ':' + end_point + "Length "+ n_array.length)
+  if (start_point < end_point){
+    
+    let m = Math.floor((n_array.length) / 2);
+    alert("before rec "+n_array.slice(start_point, m));
+    sort(n_array.slice(start_point, m), 0, m , "left" );
+  }
+  else {
+    alert("out" + n_array);
+  }
+  //alert("branch: "+branch +"\r\n"+ " <"+ n_array+ ">"+"\r\n" +" start pos: " + (start_point+1) +" end pos: "+ (end_point+1))
+
+  // if (start_point < end_point){
+  //   let middle = Math.floor((start_point + end_point)/2);
+  //   //alert(x);
+  //   let left_n_arr = Object.assign([],n_array).slice(0, middle);
+  //   sort(left_n_arr , 0, middle, "left" );
+  //   //alert("out")  
+  //   let right_n_arr =Object.assign([],n_array).slice(middle);
+  //   sort(right_n_arr= n_array.slice(middle+1, end_point) , middle+1, end_point, "right" );
+    
+  // }
+  // else {
+  //   aaa +=' : '+ n_array[0];
+  //   c++;
+  //   return n_array;
+  // }  
 }
 
 
