@@ -44,6 +44,7 @@ $(document).ready(function() {
   shuffle(Object.assign([],numbers_array));
   new_numbers();
   $("#btn_sort").on('click', ()=>{
+    //loop_with_delay(numbers_array);
     bubble(numbers_array);
     //sort(numbers_array,0,numbers_array.length-1,"0"); //Object.assign([],numbers_array)
   })
@@ -69,6 +70,36 @@ function shuffle(n_array){
     return 0;
   }
 }
+
+
+let c = 0;
+let delay = 1000;
+
+
+function loop_with_delay(n_array){
+  setTimeout(function(){
+    let flag = false;
+    if (n_array[c] > n_array[c+1] && c+1 < n_array.length) {
+        flag = true;
+        let tmp = n_array[c];
+        n_array[c] = n_array[c+1];
+        change_cell("n"+c, n_array[c+1], c);
+        n_array[c+1] = tmp;
+        change_cell("n"+(c+1), tmp, c);
+      }
+    if (flag){
+      loop_with_delay(n_array);
+    }
+    else{
+      return 0
+    }
+    c++;
+    if (c < n_array.length){
+      loop_with_delay(n_array);
+    }
+  }, delay)
+}
+
 
 
 function bubble(n_array){
