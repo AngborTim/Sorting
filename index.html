@@ -56,7 +56,7 @@ $("#btn_sort").on('click', ()=>{
 
 
 let a = 0;
-let delay = 200;
+let delay = 100;
 let flag = false;
 
 function loop_with_delay(n_array){
@@ -74,7 +74,7 @@ function loop_with_delay(n_array){
       loop_with_delay(n_array);
     }
     else if (!flag ){
-      alert("EndS");
+      alert("End");
       return;
     }
   }, delay)
