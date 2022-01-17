@@ -30,9 +30,7 @@
     <tr id="buffer">
     </tr>
   </table>
-<input id="btn_sort" type="button" class="btn btn-outline-primary" value="Merge sort">
-<br>
-<input id="btn_flag" type="button" class="btn btn-outline-primary" value="Flag">
+<input id="btn_sort" type="button" class="btn btn-outline-primary" value="Shaker">
 
 </div>
 
@@ -50,8 +48,6 @@ $(document).ready(function() {
 
 $("#btn_sort").on('click', ()=>{
   loop_with_delay(numbers_array) ;
-    //bubble(numbers_array);
-    //sort(numbers_array,0,numbers_array.length-1,"0"); //Object.assign([],numbers_array)
   })
 
 
@@ -102,29 +98,6 @@ function comparation(a){
   }
 }
 
-
-function bubble(n_array){
-  // fast buble sorting
-  let flag = false;
-  for (let a = 0; a<n_array.length; a++){
-    if (n_array[a] > n_array[a+1] && a+1 < n_array.length) {
-      flag = true;
-      let tmp = n_array[a];
-      n_array[a] = n_array[a+1];
-      change_cell(a, n_array[a+1], a);
-      n_array[a+1] = tmp;
-      change_cell(a+1, tmp, a);
-    }
-  }
-  if (flag){
-    bubble(n_array);
-  }
-  else{
-    return 0
-  }
-}
-
-
 function shuffle(n_array){
   // пока длинна временного массива больше 1
   if (n_array.length-1>1){
@@ -148,28 +121,6 @@ function shuffle(n_array){
 function change_cell(index, value, delay){
   $("#"+"n"+index).text(value)
 }
-
-//function sort(n_array, start_point, end_point, branch){
-  // merge sort 
-  
-  //alert("branch: "+branch +"\r\n"+ " <"+ n_array+ ">"+"\r\n" +" start pos: " + (start_point+1) +" end pos: "+ (end_point+1))
-
-  // if (start_point < end_point){
-  //   let middle = Math.floor((start_point + end_point)/2);
-  //   //alert(x);
-  //   let left_n_arr = Object.assign([],n_array).slice(0, middle);
-  //   sort(left_n_arr , 0, middle, "left" );
-  //   //alert("out")  
-  //   let right_n_arr =Object.assign([],n_array).slice(middle);
-  //   sort(right_n_arr= n_array.slice(middle+1, end_point) , middle+1, end_point, "right" );
-    
-  // }
-  // else {
-  //   aaa +=' : '+ n_array[0];
-  //   c++;
-  //   return n_array;
-  // }  
-//}
 
 function new_numbers(){
   for (let i = 0; i<count; i++){
