@@ -82,9 +82,12 @@ function loop_with_delay(n_array){
 }
 
 function comparation(a){
-  // если левая позиция больше правой, меняем местами
-  $("#"+"n"+a).css("background-color", "slategrey");
-
+  if ($("#"+"n"+a).css("background-color") == "rgb(112, 128, 144)"){
+    $("#"+"n"+a).css("background-color", "transparent");
+  }
+  else {
+    $("#"+"n"+a).css("background-color", "slategrey");
+  }
   if (numbers_array[a] > numbers_array[a+1] && a+1 < numbers_array.length) {
     // устанавливаем флаг замены
     let tmp = numbers_array[a];
@@ -101,6 +104,7 @@ function comparation(a){
 
 
 function bubble(n_array){
+  // fast buble sorting
   let flag = false;
   for (let a = 0; a<n_array.length; a++){
     if (n_array[a] > n_array[a+1] && a+1 < n_array.length) {
@@ -141,14 +145,13 @@ function shuffle(n_array){
   }
 }
 
-
 function change_cell(index, value, delay){
   $("#"+"n"+index).text(value)
 }
 
-
-function sort(n_array, start_point, end_point, branch){
-
+//function sort(n_array, start_point, end_point, branch){
+  // merge sort 
+  
   //alert("branch: "+branch +"\r\n"+ " <"+ n_array+ ">"+"\r\n" +" start pos: " + (start_point+1) +" end pos: "+ (end_point+1))
 
   // if (start_point < end_point){
@@ -166,9 +169,7 @@ function sort(n_array, start_point, end_point, branch){
   //   c++;
   //   return n_array;
   // }  
-}
-
-
+//}
 
 function new_numbers(){
   for (let i = 0; i<count; i++){
