@@ -31,24 +31,94 @@
     </tr>
   </table>
 <input id="btn_sort" type="button" class="btn btn-outline-primary" value="Merge sort">
+<br>
+<input id="btn_flag" type="button" class="btn btn-outline-primary" value="Flag">
+
 </div>
 
 </body>
 
 <script>
 let count = 20;
-
 let numbers_array = Array.from(Array(count).keys());
 
 $(document).ready(function() {
   shuffle(Object.assign([],numbers_array));
   new_numbers();
-  $("#btn_sort").on('click', ()=>{
-    //loop_with_delay(numbers_array);
-    bubble(numbers_array);
+});
+
+
+$("#btn_sort").on('click', ()=>{
+  loop_with_delay(numbers_array) ;
+    //bubble(numbers_array);
     //sort(numbers_array,0,numbers_array.length-1,"0"); //Object.assign([],numbers_array)
   })
-});
+
+
+let a = 0;
+let delay = 200;
+let flag = false;
+
+function loop_with_delay(n_array){
+  setTimeout(function(){
+    if (comparation(a)){
+      flag = true;
+    }
+    a++;
+    if (a < count){
+      loop_with_delay(n_array);
+    }
+    else if (flag) {
+      flag = false;
+      a = 0;
+      loop_with_delay(n_array);
+    }
+    else if (!flag ){
+      alert("EndS");
+      return;
+    }
+  }, delay)
+  return
+}
+
+function comparation(a){
+  // если левая позиция больше правой, меняем местами
+  $("#"+"n"+a).css("background-color", "slategrey");
+
+  if (numbers_array[a] > numbers_array[a+1] && a+1 < numbers_array.length) {
+    // устанавливаем флаг замены
+    let tmp = numbers_array[a];
+    numbers_array[a] = numbers_array[a+1];
+    change_cell(a, numbers_array[a+1], a);
+    numbers_array[a+1] = tmp;
+    change_cell(a+1, tmp, a);
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+
+function bubble(n_array){
+  let flag = false;
+  for (let a = 0; a<n_array.length; a++){
+    if (n_array[a] > n_array[a+1] && a+1 < n_array.length) {
+      flag = true;
+      let tmp = n_array[a];
+      n_array[a] = n_array[a+1];
+      change_cell(a, n_array[a+1], a);
+      n_array[a+1] = tmp;
+      change_cell(a+1, tmp, a);
+    }
+  }
+  if (flag){
+    bubble(n_array);
+  }
+  else{
+    return 0
+  }
+}
 
 
 function shuffle(n_array){
@@ -72,59 +142,8 @@ function shuffle(n_array){
 }
 
 
-let c = 0;
-let delay = 1000;
-
-
-function loop_with_delay(n_array){
-  setTimeout(function(){
-    let flag = false;
-    if (n_array[c] > n_array[c+1] && c+1 < n_array.length) {
-        flag = true;
-        let tmp = n_array[c];
-        n_array[c] = n_array[c+1];
-        change_cell("n"+c, n_array[c+1], c);
-        n_array[c+1] = tmp;
-        change_cell("n"+(c+1), tmp, c);
-      }
-    if (flag){
-      loop_with_delay(n_array);
-    }
-    else{
-      return 0
-    }
-    c++;
-    if (c < n_array.length){
-      loop_with_delay(n_array);
-    }
-  }, delay)
-}
-
-
-
-function bubble(n_array){
-  let flag = false;
-  for (let a = 0; a<n_array.length; a++){
-    if (n_array[a] > n_array[a+1] && a+1 < n_array.length) {
-      flag = true;
-      let tmp = n_array[a];
-      n_array[a] = n_array[a+1];
-      change_cell("n"+a, n_array[a+1], a);
-      n_array[a+1] = tmp;
-      change_cell("n"+(a+1), tmp, a);
-    }
-  }
-  if (flag){
-    bubble(n_array);
-  }
-  else{
-    return 0
-  }
-}
-
-
 function change_cell(index, value, delay){
-  $("#"+index).text(value)
+  $("#"+"n"+index).text(value)
 }
 
 
