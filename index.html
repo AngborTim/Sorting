@@ -84,7 +84,7 @@ function sort(n_array, start_point, end_point, branch){
      sort(left_n_arr , 0, middle, "left" );
      //alert("out")  
     let right_n_arr =Object.assign([],n_array).slice(middle);
-     sort(right_n_arr= n_array.slice(middle+1, end_point) , middle+1, end_point, "right" );
+     return sort(right_n_arr= n_array.slice(middle+1, end_point) , middle+1, end_point, "right" );
     
    }
    else {
