@@ -30,8 +30,9 @@
     <tr id="buffer">
     </tr>
   </table>
-<input id="btn_sort" type="button" class="btn btn-outline-primary" value="Shaker">
-
+<input id="btn_bubble" type="button" class="btn btn-outline-primary" value="Bubble">
+<br>
+<input id="btn_shaker" type="button" class="btn btn-outline-primary" value="Shaker">
 </div>
 
 </body>
@@ -46,7 +47,7 @@ $(document).ready(function() {
 });
 
 
-$("#btn_sort").on('click', ()=>{
+$("#btn_shaker").on('click', ()=>{
   loop_with_delay(numbers_array) ;
   })
 
