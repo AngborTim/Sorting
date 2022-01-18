@@ -30,8 +30,14 @@
     <tr id="buffer">
     </tr>
   </table>
+<<<<<<< HEAD
 <input id="btn_sort" type="button" class="btn btn-outline-primary" value="Merge sort">
 
+=======
+<input id="btn_bubble" type="button" class="btn btn-outline-primary" value="Bubble">
+<br>
+<input id="btn_shaker" type="button" class="btn btn-outline-primary" value="Shaker">
+>>>>>>> shaker
 </div>
 
 </body>
@@ -46,13 +52,19 @@ $(document).ready(function() {
 });
 
 
-$("#btn_sort").on('click', ()=>{
+$("#btn_shaker").on('click', ()=>{
   loop_with_delay(numbers_array) ;
+<<<<<<< HEAD
    })
+=======
+  })
+
+>>>>>>> shaker
 
 let a = 0;
 let delay = 100;
 let flag = false;
+let last_change;
 
 function loop_with_delay(n_array){
   setTimeout(function(){
@@ -66,9 +78,13 @@ function loop_with_delay(n_array){
     else if (flag) {
       flag = false;
       a = 0;
+      count = last_change; // сокращает счетчик соответственно последней позиции
+      // когда была произведена перестановка
+      green_color(2);
       loop_with_delay(n_array);
     }
     else if (!flag ){
+      green_color(1);
       alert("End");
       return;
     }
@@ -90,6 +106,7 @@ function comparation(a){
     change_cell(a, numbers_array[a+1], a);
     numbers_array[a+1] = tmp;
     change_cell(a+1, tmp, a);
+    last_change = a; // сохраняем позицию в массиве, когда была сделана перестановка
     return true;
   }
   else {
@@ -97,6 +114,7 @@ function comparation(a){
   }
 }
 
+<<<<<<< HEAD
 
 // function bubble(n_array){
 //   // fast buble sorting
@@ -118,7 +136,15 @@ function comparation(a){
 //     return 0
 //   }
 // }
-
+=======
+function green_color(all){
+  if (all == 1) z = 0;
+  else z = count+1;
+  for (let i = z; i < numbers_array.length; i++){
+    $("#"+"n"+i).css("background-color", "mediumspringgreen");
+  }
+}
+>>>>>>> shaker
 
 function shuffle(n_array){
   // пока длинна временного массива больше 1
