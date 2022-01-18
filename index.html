@@ -64,9 +64,10 @@ function show_tree(root_node){
 
 
 class tree_node {
-  constructor(n_array) {
+  constructor(n_array, ancestor_level) {
     this.n_array = n_array;
     this.descendants = [];
+    this.level = ancestor_level+1;
     this.child();
   }
   child() {
@@ -74,8 +75,8 @@ class tree_node {
       let m = Math.floor(this.n_array.length / 2);
       let l = this.n_array.slice(0,m);
       let r = this.n_array.slice(m);
-      const left = new tree_node(l);
-      const right = new tree_node(r);
+      const left = new tree_node(l, this.level);
+      const right = new tree_node(r, this.level);
       this.descendants.push(left, right);
     }
     else return 0
@@ -83,20 +84,13 @@ class tree_node {
 }
 
 function make_tree(n_array){
-   root = new tree_node(n_array); 
+   root = new tree_node(n_array, 0); 
 }
-
-
-
 
 
 $("#btn_sort").on('click', ()=>{
     sort(numbers_array,0,numbers_array.length-1,"0"); //Object.assign([],numbers_array)
   })
-
-
-
-
 
 
 function shuffle(n_array){
