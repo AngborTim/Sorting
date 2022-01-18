@@ -30,14 +30,11 @@
     <tr id="buffer">
     </tr>
   </table>
-<<<<<<< HEAD
 <input id="btn_sort" type="button" class="btn btn-outline-primary" value="Merge sort">
 
-=======
 <input id="btn_bubble" type="button" class="btn btn-outline-primary" value="Bubble">
 <br>
 <input id="btn_shaker" type="button" class="btn btn-outline-primary" value="Shaker">
->>>>>>> shaker
 </div>
 
 </body>
@@ -54,12 +51,8 @@ $(document).ready(function() {
 
 $("#btn_shaker").on('click', ()=>{
   loop_with_delay(numbers_array) ;
-<<<<<<< HEAD
-   })
-=======
   })
 
->>>>>>> shaker
 
 let a = 0;
 let delay = 100;
@@ -114,29 +107,6 @@ function comparation(a){
   }
 }
 
-<<<<<<< HEAD
-
-// function bubble(n_array){
-//   // fast buble sorting
-//   let flag = false;
-//   for (let a = 0; a<n_array.length; a++){
-//     if (n_array[a] > n_array[a+1] && a+1 < n_array.length) {
-//       flag = true;
-//       let tmp = n_array[a];
-//       n_array[a] = n_array[a+1];
-//       change_cell(a, n_array[a+1], a);
-//       n_array[a+1] = tmp;
-//       change_cell(a+1, tmp, a);
-//     }
-//   }
-//   if (flag){
-//     bubble(n_array);
-//   }
-//   else{
-//     return 0
-//   }
-// }
-=======
 function green_color(all){
   if (all == 1) z = 0;
   else z = count+1;
@@ -144,7 +114,6 @@ function green_color(all){
     $("#"+"n"+i).css("background-color", "mediumspringgreen");
   }
 }
->>>>>>> shaker
 
 function shuffle(n_array){
   // пока длинна временного массива больше 1
