@@ -30,15 +30,18 @@
     <tr id="buffer">
     </tr>
   </table>
-<input id="btn_sort" type="button" class="btn btn-outline-primary" value="Merge sort">
+<input id="btn_sort" type="button" class="btn btn-outline-primary btn-block" value="Merge sort">
+<input onclick="make_tree(numbers_array)" id="test" type="button" class="btn btn-outline-primary btn-block" value="Create a tree">
+<input id="show_tree" type="button" class="btn btn-outline-primary btn-block" value="Show tree">
 
 </div>
 
 </body>
 
 <script>
-let count = 20;
+let count = 5;
 let numbers_array = Array.from(Array(count).keys());
+let root;
 
 $(document).ready(function() {
   shuffle(Object.assign([],numbers_array));
@@ -46,9 +49,54 @@ $(document).ready(function() {
 });
 
 
+$("#show_tree").on('click', () =>{
+  show_tree(root);
+})
+
+function show_tree(root_node){
+  alert(root_node.n_array)
+
+  root_node.descendants.forEach(element => {
+    return show_tree(element);
+  });  
+}
+
+
+
+class tree_node {
+  constructor(n_array) {
+    this.n_array = n_array;
+    this.descendants = [];
+    this.child();
+  }
+  child() {
+    if (this.n_array.length !=1){
+      let m = Math.floor(this.n_array.length / 2);
+      let l = this.n_array.slice(0,m);
+      let r = this.n_array.slice(m);
+      const left = new tree_node(l);
+      const right = new tree_node(r);
+      this.descendants.push(left, right);
+    }
+    else return 0
+  }
+}
+
+function make_tree(n_array){
+   root = new tree_node(n_array); 
+}
+
+
+
+
+
 $("#btn_sort").on('click', ()=>{
     sort(numbers_array,0,numbers_array.length-1,"0"); //Object.assign([],numbers_array)
   })
+
+
+
+
 
 
 function shuffle(n_array){
