@@ -59,8 +59,9 @@ $("#show_tree").on('click', () =>{
 class tree_node {
   constructor(n_array, parent) {
     this.n_array = n_array;
-    this.descendants = [];
+    this.has_children = false;
     this.branch = null;
+    this.children = [];
     this.left = null;
     this.right = null;
     if (typeof parent != "undefined" ){
@@ -79,6 +80,7 @@ class tree_node {
   }
   child() {
     if (this.n_array.length !=1){
+      this.has_children = true;
       let m = Math.floor(this.n_array.length / 2);
       let l = this.n_array.slice(0,m);
       let r = this.n_array.slice(m);
@@ -86,16 +88,17 @@ class tree_node {
       left.branch = "left";
       const right = new tree_node(r,this);
       right.branch = "right";
-      this.descendants.push(left, right);
       this.left = left;
       this.right = right;
+      this.children.push(this.left , this.right);
+
     }
     else return 0
   }
 
   sort(){
-      if (this.descendants.length != 0){
-        this.descendants.forEach(element => {
+      if (this.has_children){
+        this.children.forEach(element => {
           element.sort();
           });
       }
@@ -125,8 +128,8 @@ class tree_node {
   
   show(){
     console.log(this.n_array + " | level: " + this.level);
-      if (this.descendants.length != 0){
-        this.descendants.forEach(element => {
+      if (this.has_children){
+        this.children.forEach(element => {
           element.show();
         });
       }
@@ -138,17 +141,17 @@ class tree_node {
 }
 
 
-function show_tree(root_node, depth = 0){
-  console.log(root_node.n_array + "| depth: " + depth);
-  if (root_node.descendants.length != 0){
-    root_node.descendants.forEach(element => {
-      show_tree(element, depth +1);
-    });
-  }
-  else {
-    return 0;
-  } 
-}
+// function show_tree(root_node, depth = 0){
+//   console.log(root_node.n_array + "| depth: " + depth);
+//   if (root_node.descendants.length != 0){
+//     root_node.descendants.forEach(element => {
+//       show_tree(element, depth +1);
+//     });
+//   }
+//   else {
+//     return 0;
+//   } 
+// }
 
 
 function make_tree(n_array){
