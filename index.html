@@ -39,7 +39,7 @@
 </body>
 
 <script>
-let count = 6;
+let count = 5;
 let numbers_array = Array.from(Array(count).keys());
 let root;
 
@@ -95,39 +95,102 @@ class tree_node {
     }
     else return 0
   }
-
-  sort(){
-      if (this.has_children){
-        this.children.forEach(element => {
-          element.sort();
-          });
+  
+  delete(){
+    try{
+      if (this.has_children) {
+        throw "Can't delete. Has children."
       }
       else {
-        let a = this.n_array;
-        let b;
-        console.log("I'm "+ this.branch + " : "+ this.n_array);
-        let z = this.branch;
-        switch (z) {
-          case "left":
-            b = this.parent.right.n_array;
-            console.log("My sibling: "+this.parent.right.branch);
-            break;
-          case "right":
-            b = this.parent.left.n_array;
-            console.log("My sibling: "+this.parent.left.branch);
-            break;
-          case "null":
-            console.log("I'm alone");  
-            b = "-";
-            break;
+        delete this.n_array;
+        delete this.has_children;
+        if (this.branch == "left"){
+          this.parent.children.shift();
+          delete this.parent.left;
         }
-        console.log(a + " " + b);
-        return 0;
-      } 
+        else {
+          this.parent.children.pop();
+          delete this.parent.right;
+        }
+        delete this.branch;}
+    }
+    catch(err){
+      console.log("Error: "+err);
+    }
+  }
+
+  sort(){
+    if (this.has_children){
+      this.children.forEach(element => {
+        return element.sort();
+        });
+    }
+    else {
+      if (this.branch == "left" && !this.parent.right.has_children) {
+        let tmp=[];
+        this.n_array.forEach((element, index) => {
+          if (element < this.parent.right.n_array[index]){
+            tmp.push(element, this.parent.right.n_array[index]);
+          }
+          else {
+            tmp.push(this.parent.right.n_array[index], element);
+          }
+          console.log(tmp)
+        })
+        if (this.n_array.length < this.parent.right.n_array.length){
+          for (let i=this.n_array.length-1; i < this.parent.right.n_array.length; i++){
+            tmp.push(this.parent.right.n_array[i]);
+          }
+        }
+        else if (this.n_array.length > this.parent.right.n_array.length){
+          for (let i=this.parent.right.n_array.length; i < this.n_array.length-1; i++){
+            tmp.push(this.n_array[i]);
+          }
+        }
+      }
+    }
+        // let left = this.n_array[0];
+        // let right = this.parent.right.n_array[0]; 
+        // this.parent.n_array = [];
+        // if (left < right){
+        //   this.parent.n_array.push(left, right)
+        // }
+        // else {
+        //   this.parent.n_array.push(right, left)
+        // }
+        // this.parent.right.delete();
+        // this.delete();
+
+      // let z = this.branch;
+      // let d;
+      // switch (z) {
+      //   case "left":
+      //     if (this.parent.right.has_children) {
+      //       d = " has children";
+      //     } 
+      //     else {
+      //       d = "";
+      //     }
+      //     console.log("I'm "+z+ " | "+ this.n_array+ "| My sibling: | "+ this.parent.right.n_array +" | "+ this.parent.right.branch+d);
+      //     break;
+      //   case "right":
+      //     if (this.parent.left.has_children) {
+      //       d = "has children";
+      //     } 
+      //     else {
+      //       d = "";
+      //     }
+      //     console.log("I'm "+z+ " | "+ this.n_array+ "| My sibling:  | "+ this.parent.left.n_array +" | "+ this.parent.left.branch+d);
+      //     break;
+      //   case "null":
+      //     console.log("I'm alone and " +z);  
+      //     break;
+      // }
+      return 0;
   }
   
   show(){
-    console.log(this.n_array + " | level: " + this.level);
+    console.log(this.n_array + " | level: " + this.level + " Branch: "+ this.branch);
       if (this.has_children){
         this.children.forEach(element => {
           element.show();
