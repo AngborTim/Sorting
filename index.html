@@ -39,7 +39,7 @@
 </body>
 
 <script>
-let count = 5;
+let count = 15;
 let numbers_array = Array.from(Array(count).keys());
 let root;
 
@@ -62,8 +62,9 @@ class tree_node {
     this.has_children = false;
     this.branch = null;
     this.children = [];
-    this.left = null;
-    this.right = null;
+    this.sibling = null;
+    //this.left = null;
+    //this.right = null;
     if (typeof parent != "undefined" ){
       this.parent = parent;
     }
@@ -85,12 +86,13 @@ class tree_node {
       let l = this.n_array.slice(0,m);
       let r = this.n_array.slice(m);
       const left = new tree_node(l, this);
-      left.branch = "left";
       const right = new tree_node(r,this);
+      left.branch = "left";
       right.branch = "right";
-      this.left = left;
-      this.right = right;
-      this.children.push(this.left , this.right);
+      left.sibling = right;
+      right.sibling = left;
+      this.children.push(left , right);
+      this.n_array = [];
 
     }
     else return 0
@@ -103,16 +105,17 @@ class tree_node {
       }
       else {
         delete this.n_array;
-        delete this.has_children;
         if (this.branch == "left"){
           this.parent.children.shift();
-          delete this.parent.left;
         }
         else {
           this.parent.children.pop();
-          delete this.parent.right;
         }
-        delete this.branch;}
+        if (this.parent.children.length == 0){
+            this.parent.has_children = false;
+          }
+        delete this.sibling;
+      }
     }
     catch(err){
       console.log("Error: "+err);
@@ -120,80 +123,57 @@ class tree_node {
   }
 
   sort(){
+    while (this.has_children){
+      return this.merge();
+    }
+    return 0
+  }
+
+  merge(){
     if (this.has_children){
       this.children.forEach(element => {
-        return element.sort();
+        return element.merge();
         });
     }
     else {
-      if (this.branch == "left" && !this.parent.right.has_children) {
-        let tmp=[];
-        this.n_array.forEach((element, index) => {
-          if (element < this.parent.right.n_array[index]){
-            tmp.push(element, this.parent.right.n_array[index]);
-          }
-          else {
-            tmp.push(this.parent.right.n_array[index], element);
-          }
-          console.log(tmp)
-        })
-        if (this.n_array.length < this.parent.right.n_array.length){
-          for (let i=this.n_array.length-1; i < this.parent.right.n_array.length; i++){
-            tmp.push(this.parent.right.n_array[i]);
-          }
+
+
+      
+      // работаем с левой веткой и только если правый sibling тоже leaf
+      if (this.branch == "left" && !this.sibling.has_children) {
+       
+         while (this.n_array.length != 0 && this.sibling.n_array != 0){
+          // пока какой-то из массивов не исчерпается 
+          if (this.n_array[0] < this.sibling.n_array[0]){
+            // если значение левого массива меньше
+             this.parent.n_array.push(this.n_array[0]);
+             this.n_array.shift();
+           }
+           else {
+             // если значение правого массива меньше
+             this.parent.n_array.push(this.sibling.n_array.shift());
+            }
+         }
+         if (this.n_array.length == 0) {
+           // если в одном из массивов остались значения
+          this.parent.n_array.push(this.sibling.n_array)
         }
-        else if (this.n_array.length > this.parent.right.n_array.length){
-          for (let i=this.parent.right.n_array.length; i < this.n_array.length-1; i++){
-            tmp.push(this.n_array[i]);
-          }
-        }
+         else {
+          this.parent.n_array.push(this.n_array);
+         }
+         // удаляем оба нода, так как их значени е перенесено в parent
+         this.sibling.delete();
+         this.delete();
       }
     }
-        // let left = this.n_array[0];
-        // let right = this.parent.right.n_array[0]; 
-        // this.parent.n_array = [];
-        // if (left < right){
-        //   this.parent.n_array.push(left, right)
-        // }
-        // else {
-        //   this.parent.n_array.push(right, left)
-        // }
-        // this.parent.right.delete();
-        // this.delete();
-
-      // let z = this.branch;
-      // let d;
-      // switch (z) {
-      //   case "left":
-      //     if (this.parent.right.has_children) {
-      //       d = " has children";
-      //     } 
-      //     else {
-      //       d = "";
-      //     }
-      //     console.log("I'm "+z+ " | "+ this.n_array+ "| My sibling: | "+ this.parent.right.n_array +" | "+ this.parent.right.branch+d);
-      //     break;
-      //   case "right":
-      //     if (this.parent.left.has_children) {
-      //       d = "has children";
-      //     } 
-      //     else {
-      //       d = "";
-      //     }
-      //     console.log("I'm "+z+ " | "+ this.n_array+ "| My sibling:  | "+ this.parent.left.n_array +" | "+ this.parent.left.branch+d);
-      //     break;
-      //   case "null":
-      //     console.log("I'm alone and " +z);  
-      //     break;
-      // }
       return 0;
   }
   
   show(){
-    console.log(this.n_array + " | level: " + this.level + " Branch: "+ this.branch);
+    console.log(this.n_array + " | Level: " + this.level + ". "+ this.branch + " Has children = " + this.has_children);
       if (this.has_children){
         this.children.forEach(element => {
-          element.show();
+          return  element.show();
         });
       }
       else {
@@ -247,28 +227,6 @@ function shuffle(n_array){
   }
 }
 
-
-// function sort(n_array, start_point, end_point, branch){
-//   //merge sort 
-  
-//   alert("branch: "+branch +"\r\n"+ " <"+ n_array+ ">"+"\r\n" +" start pos: " + (start_point+1) +" end pos: "+ (end_point+1))
-
-//    if (start_point < end_point){
-//      let middle = Math.floor((start_point + end_point)/2);
-//      //alert(x);
-//      let left_n_arr = Object.assign([],n_array).slice(0, middle);
-//      sort(left_n_arr , 0, middle, "left" );
-//      //alert("out")  
-//     let right_n_arr =Object.assign([],n_array).slice(middle);
-//      return sort(right_n_arr= n_array.slice(middle+1, end_point) , middle+1, end_point, "right" );
-    
-//    }
-//    else {
-//      aaa +=' : '+ n_array[0];
-//      c++;
-//      return n_array;
-//    }  
-// }
 
 function new_numbers(){
   for (let i = 0; i<count; i++){
