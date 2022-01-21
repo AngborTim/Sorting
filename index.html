@@ -64,8 +64,6 @@ class tree_node {
     this.branch = null;
     this.children = [];
     this.sibling = null;
-    //this.left = null;
-    //this.right = null;
     if (typeof parent != "undefined" ){
       this.parent = parent;
     }
@@ -124,11 +122,11 @@ class tree_node {
   }
 
   sort(){
-    while (this.has_children){
-      console.log(this.level)
-      return this.merge();
+    while (this.has_children == true){
+      this.merge();
     }
-    return 0
+    console.log(" Level " + this.level + ". [" + this.n_array + "]")
+    return
   }
 
   merge(){
@@ -138,9 +136,6 @@ class tree_node {
         });
     }
     else {
-
-      // не работает на третьем запуске merge
-
       // работаем с левой веткой и только если правый sibling тоже leaf
       if (this.branch == "left" && !this.sibling.has_children) {
         let tmp =[]
