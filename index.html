@@ -30,8 +30,8 @@
     <tr id="buffer">
     </tr>
   </table>
-<input id="btn_sort" type="button" class="btn btn-outline-primary btn-block" value="Merge sort">
-<input onclick="make_tree(numbers_array)" id="test" type="button" class="btn btn-outline-primary btn-block" value="Create a tree">
+<!--<input id="btn_sort" type="button" class="btn btn-outline-primary btn-block" value="Merge sort">
+ <input onclick="make_tree(numbers_array)" id="test" type="button" class="btn btn-outline-primary btn-block" value="Create a tree"> -->
 <input id="show_tree" type="button" class="btn btn-outline-primary btn-block" value="Show tree">
 
 </div>
@@ -46,6 +46,7 @@ let root;
 $(document).ready(function() {
   shuffle(Object.assign([],numbers_array));
   new_numbers();
+  make_tree(numbers_array);
 });
 
 
@@ -124,6 +125,7 @@ class tree_node {
 
   sort(){
     while (this.has_children){
+      console.log(this.level)
       return this.merge();
     }
     return 0
@@ -137,33 +139,34 @@ class tree_node {
     }
     else {
 
+      // не работает на третьем запуске merge
 
-      
       // работаем с левой веткой и только если правый sibling тоже leaf
       if (this.branch == "left" && !this.sibling.has_children) {
-       
-         while (this.n_array.length != 0 && this.sibling.n_array != 0){
+        let tmp =[]
+        while (this.n_array.length != 0 && this.sibling.n_array != 0) {
           // пока какой-то из массивов не исчерпается 
-          if (this.n_array[0] < this.sibling.n_array[0]){
+          if (this.n_array[0] < this.sibling.n_array[0]) {
             // если значение левого массива меньше
-             this.parent.n_array.push(this.n_array[0]);
-             this.n_array.shift();
-           }
-           else {
-             // если значение правого массива меньше
-             this.parent.n_array.push(this.sibling.n_array.shift());
-            }
-         }
-         if (this.n_array.length == 0) {
-           // если в одном из массивов остались значения
-          this.parent.n_array.push(this.sibling.n_array)
+            tmp.push(this.n_array[0]);
+            this.n_array.shift();
+          }
+          else {
+            // если значение правого массива меньше
+            tmp.push(this.sibling.n_array.shift());
+          }
         }
-         else {
-          this.parent.n_array.push(this.n_array);
-         }
-         // удаляем оба нода, так как их значени е перенесено в parent
-         this.sibling.delete();
-         this.delete();
+        if (this.n_array.length == 0) {
+          // если в одном из массивов остались значения
+          tmp.push(this.sibling.n_array)
+        }
+        else {
+          tmp.push(this.n_array);
+        }
+        // удаляем оба нода, так как их значени е перенесено в parent
+        this.parent.n_array = tmp.flat();
+        this.sibling.delete();
+        this.delete();
       }
     }
       return 0;
@@ -182,20 +185,6 @@ class tree_node {
     }
 // CLASS END ===========================
 }
-
-
-// function show_tree(root_node, depth = 0){
-//   console.log(root_node.n_array + "| depth: " + depth);
-//   if (root_node.descendants.length != 0){
-//     root_node.descendants.forEach(element => {
-//       show_tree(element, depth +1);
-//     });
-//   }
-//   else {
-//     return 0;
-//   } 
-// }
-
 
 function make_tree(n_array){
    root = new tree_node(n_array); 
