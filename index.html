@@ -124,7 +124,7 @@ class tree_node {
     } 
 
 
-    console.log( this.n_array.length , this.has_children)    
+    console.log( this.n_array , this.has_children)    
     if (this.n_array.length == 1 && (this.has_children || this.sibling.has_children)){
       if ($('tr#level'+(this.level+1)).length == 0){
           $("#"+table_id).append($("<tr id='level"+(this.level+1)+"'></tr>"))
