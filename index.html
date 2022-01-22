@@ -30,7 +30,6 @@
     <tr id="buffer">
     </tr>
   </table>
-<input id="btn_sort" type="button" class="btn btn-outline-primary btn-block" value="Merge sort">
 <input id="btn_shaker" type="button" class="btn btn-outline-primary btn-block" value="Shaker">
 </div>
 
@@ -39,6 +38,28 @@
 <script>
 let count = 20;
 let numbers_array = Array.from(Array(count).keys());
+
+
+$("#test").on('click', ()=> {
+  
+  for (let i = 0; i <12; i++){
+    $("#test_row").append("<div id='"+i+"' class='col'>sss"+i+"</div>");
+  }
+
+  let $a = $("#5");
+  let $b = $("div#6");
+
+  $b.fadeTo(1000, 0)
+  $a.animate({top: $a.height()}).animate({left: $a.width()}) ;
+  //alert($a.height() + " " + $a.width())
+
+//  for (let i = 0; i <12; i++){
+//    $( "div#"+i ).slideUp( 500*i ).delay( 500*i ).fadeIn( 1000 );
+//  }
+
+
+})
+
 
 $(document).ready(function() {
   shuffle(Object.assign([],numbers_array));
