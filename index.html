@@ -36,10 +36,10 @@
 
 
 
-<table class="table">
-    <tr id="numbers">
-    </tr>
+  <table id ="tree_table" class="table">
+    
   </table>
+
 <input id="btn_sort" type="button" class="btn btn-outline-primary btn-block" value="Merge sort">
 
 </div>
@@ -51,70 +51,83 @@ let count = 2;
 let numbers_array =[];
 let root = [];
 
-$(document).ready(function() {
-  
-  //new_numbers();
-  //make_tree(numbers_array);
-});
-
-
 $("#main_input").submit('submit', () =>{
   count = parseInt($("#n_array").val());
-  console.log("count =" + count);
+  //console.log("count =" + count);
   // создаем массив чисел
   numbers_array = Array.from(Array(count).keys());
-  console.log("numbers_array before shuffle = "+numbers_array);
+  //console.log("numbers_array before shuffle = "+numbers_array);
   // перемешиваем массив
   shuffle(Object.assign([],numbers_array));
-  console.log("numbers_array after shuffle = "+numbers_array);
+  //console.log("numbers_array after shuffle = "+numbers_array);
   // создаем дерево и помещаем в него массив
-  root = new tree_node(numbers_array); 
+  root = new tree_node(numbers_array,null,"tree_table"); 
   // отображаем в таблице
-  $("#numbers").html("");
-  $("#numbers").append($("<td class='cell border' id='level0'>"+numbers_array+"</td>"));
   event.preventDefault();
 })
 
+
+
 class tree_node {
-  constructor(n_array, parent) {
+  constructor(n_array, parent, table_id, branch) {
     this.n_array = n_array;
+    if (branch != null ){
+      this.branch = branch;
+    }
+    else {
+      this.branch = null;
+    }
     this.has_children = false;
-    this.branch = null;
+    this.parent = null;
     this.children = [];
     this.sibling = null;
-    if (typeof parent != "undefined" ){
+    // при создании экземпляра класса то parent == null
+    if (parent != null ){
       this.parent = parent;
-    }
-    else {
-      this.parent = null;
-    }
-    if (this.parent == null){
-      this.level = 0;
-    }
-    else {
       this.level = this.parent.level + 1;
     }
-    this.child();
+    else {
+      this.level = 0;
+    }
+    this.create_table(table_id);
+    // запускаем создание дерева
+    this.child(table_id);
   }
-  child() {
+  child(table_id) {
     if (this.n_array.length !=1){
       this.has_children = true;
       let m = Math.floor(this.n_array.length / 2);
       let l = this.n_array.slice(0,m);
       let r = this.n_array.slice(m);
-      const left = new tree_node(l, this);
-      const right = new tree_node(r,this);
-      left.branch = "left";
-      right.branch = "right";
+      const left = new tree_node(l, this,table_id, "left");
+      const right = new tree_node(r,this,table_id, "right");
       left.sibling = right;
       right.sibling = left;
       this.children.push(left , right);
-      this.n_array = [];
-
+      //this.n_array = [];
     }
     else return 0
   }
   
+  create_table(table_id){
+    console.log("in create_table")
+    if (this.level == 0){
+      console.log("clean")
+      $("#"+table_id).html("");
+    }
+
+    if ($('tr#level'+this.level).length == 0){
+      $("#"+table_id).append($("<tr id='level"+this.level+"'></tr>"))
+      console.log("make tr with level="+this.level)
+    } 
+    if ($("tr#level"+this.level+" > td#"+this.branch).length == 0 ){
+      console.log("td#"+this.branch);
+      $("tr#level"+this.level).append($("<td class='cell border' id='"+this.branch+"'>"+this.n_array+"</td>"));
+      console.log("in tr with: "+"<td class='cell border' id='"+this.branch+"'>"+this.n_array+"</td>")
+    }    
+  }
+
+
   delete(){
     try{
       if (this.has_children) {
@@ -143,7 +156,7 @@ class tree_node {
     while (this.has_children == true){
       this.merge();
     }
-    console.log(" Level " + this.level + ". [" + this.n_array + "]")
+    //console.log(" Level " + this.level + ". [" + this.n_array + "]")
     return
   }
 
@@ -177,6 +190,7 @@ class tree_node {
           tmp.push(this.n_array);
         }
         // удаляем оба нода, так как их значени е перенесено в parent
+        this.parent.n_array = [];
         this.parent.n_array = tmp.flat();
         this.sibling.delete();
         this.delete();
@@ -224,16 +238,6 @@ function shuffle(n_array){
     return 0;
   }
 }
-
-
-// function new_numbers(){
-//   for (let i = 0; i<count; i++){
-//     let a = $("<td class='cell border' id='n"+i+"'></td>").text(numbers_array[i]);
-//     $("#numbers").append(a);
-//     $("#buffer").append("<td class='cell border' id='b"+i+"'></td>");
-//   }
-// }
-
 
 </script>
 
