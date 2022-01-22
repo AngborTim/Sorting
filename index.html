@@ -24,37 +24,55 @@
 
 <div class="container justify-content-center"> 
 
-  <table class="table">
+<form id="main_input">
+<div class="form-group">
+<label for="n_array">Enter how many numbers should be sorted</label><br>
+<input id = "n_array" type="number" min="2" required>
+<button class="btn btn-outline-primary ">Enter</button>
+
+</div>
+</form>
+
+
+
+
+<table class="table">
     <tr id="numbers">
     </tr>
-    <tr id="buffer">
-    </tr>
   </table>
-<!--<input id="btn_sort" type="button" class="btn btn-outline-primary btn-block" value="Merge sort">
- <input onclick="make_tree(numbers_array)" id="test" type="button" class="btn btn-outline-primary btn-block" value="Create a tree"> -->
-<input id="show_tree" type="button" class="btn btn-outline-primary btn-block" value="Show tree">
+<input id="btn_sort" type="button" class="btn btn-outline-primary btn-block" value="Merge sort">
 
 </div>
 
 </body>
 
 <script>
-let count = 15;
-let numbers_array = Array.from(Array(count).keys());
-let root;
+let count = 2;
+let numbers_array =[];
+let root = [];
 
 $(document).ready(function() {
-  shuffle(Object.assign([],numbers_array));
-  new_numbers();
-  make_tree(numbers_array);
+  
+  //new_numbers();
+  //make_tree(numbers_array);
 });
 
 
-$("#show_tree").on('click', () =>{
-  if (typeof root != "undefined"){
-    root.show();
-  }
-  else alert("There is no tree")
+$("#main_input").submit('submit', () =>{
+  count = parseInt($("#n_array").val());
+  console.log("count =" + count);
+  // создаем массив чисел
+  numbers_array = Array.from(Array(count).keys());
+  console.log("numbers_array before shuffle = "+numbers_array);
+  // перемешиваем массив
+  shuffle(Object.assign([],numbers_array));
+  console.log("numbers_array after shuffle = "+numbers_array);
+  // создаем дерево и помещаем в него массив
+  root = new tree_node(numbers_array); 
+  // отображаем в таблице
+  $("#numbers").html("");
+  $("#numbers").append($("<td class='cell border' id='level0'>"+numbers_array+"</td>"));
+  event.preventDefault();
 })
 
 class tree_node {
@@ -181,13 +199,9 @@ class tree_node {
 // CLASS END ===========================
 }
 
-function make_tree(n_array){
-   root = new tree_node(n_array); 
-}
-
 
 $("#btn_sort").on('click', ()=>{
-    sort(numbers_array,0,numbers_array.length-1,"0"); //Object.assign([],numbers_array)
+    root.sort(); 
   })
 
 
@@ -212,13 +226,13 @@ function shuffle(n_array){
 }
 
 
-function new_numbers(){
-  for (let i = 0; i<count; i++){
-    let a = $("<td class='cell border' id='n"+i+"'></td>").text(numbers_array[i]);
-    $("#numbers").append(a);
-    $("#buffer").append("<td class='cell border' id='b"+i+"'></td>");
-  }
-}
+// function new_numbers(){
+//   for (let i = 0; i<count; i++){
+//     let a = $("<td class='cell border' id='n"+i+"'></td>").text(numbers_array[i]);
+//     $("#numbers").append(a);
+//     $("#buffer").append("<td class='cell border' id='b"+i+"'></td>");
+//   }
+// }
 
 
 </script>
