@@ -107,8 +107,6 @@ class tree_node {
     else return 0
   }
   
-
-
   create_table(table_id){
     // если это первый вход - обнуляем таблицу
     if (this.level == 0){
@@ -120,19 +118,18 @@ class tree_node {
     } 
 
     let zzzz = $("tr#level"+this.level+" > td#"+this.branch).length;
-    let ffff = $("tr#level"+this.level+" > td#"+this.branch).index(this.n_array);
-    // если ячейка с таким id не существует или существует, но без такого содержимого
-    // TODO вообще надо переделать это иначе у меня куча ячеек с одинаковы ID
-    if (zzzz == 0 || ffff == -1){
-      $("tr#level"+this.level).append($("<td class='cell border' data-toggle='tooltip' data-placement='top' title='Level "+this.level+"' id='"+this.branch+"'>"+this.n_array+"</td>"));
+    // если ячейка на этом уровне и с таким id не существует
+    if (zzzz == 0){
+      $("tr#level"+this.level).append($("<td class='cell border' data-toggle='tooltip' data-placement='top' title='Level "+this.level+"' id='"+this.branch+this.n_array.join("")+ "'>"+this.n_array+"</td>"));
     } 
 
+
+    console.log( this.n_array.length , this.has_children)    
     if (this.n_array.length == 1 && (this.has_children || this.sibling.has_children)){
-      
       if ($('tr#level'+(this.level+1)).length == 0){
           $("#"+table_id).append($("<tr id='level"+(this.level+1)+"'></tr>"))
       } 
-      $("tr#level"+(this.level+1)).append($("<td class='cell border' data-toggle='tooltip' data-placement='top' title='Level "+this.level+"' id='"+this.branch+"'>"+this.n_array+"</td>"));
+      $("tr#level"+(this.level+1)).append($("<td class='cell border' data-toggle='tooltip' data-placement='top' title='Level "+this.level+"' id='"+this.branch+this.n_array.join("")+"'>"+this.n_array+"</td>"));
             
     }
 
