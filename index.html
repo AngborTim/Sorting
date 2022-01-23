@@ -107,6 +107,70 @@ class tree_node {
     else return 0
   }
   
+  get_root(){
+    // возвращаем root 
+    if (this.parent == null){
+      return this;
+    }
+    else {
+      return this.parent.get_root(this.parent)
+    }
+  }
+
+  get_nodes_with_children(node, level, nodes){
+    if (node.has_children && node.level < level){
+      node.children.forEach(element => {
+        element.get_nodes_with_children(element, level, nodes);
+      });
+    }
+    else {
+      console.log(node.level, node.has_children)
+      if (node.level == level && node.has_children){
+        nodes.push(node);
+        return nodes;
+      }
+    }
+    return nodes;
+  }
+
+
+  get_nodes_by_level(node, level, nodes){
+    if (node.has_children && node.level < level){
+      node.children.forEach(element => {
+        element.get_nodes_by_level(element, level, nodes);
+      });
+    }
+    else {
+      if (node.level == level){
+        nodes.push(node);
+        return nodes;
+      }
+    }
+    return nodes;
+  }
+
+
+
+  find_sibling_with_children(node, level){
+    alert("node.sibling.has_children "+node.sibling.has_children);
+    alert("node.parent.sibling.children[0].has_children "+node.parent.sibling.children[0].has_children)
+    if (node.sibling.has_children){
+      console.log("1 "+node.sibling.has_children)
+      return true;
+    }
+    else if (node.parent.sibling.children[0].has_children){
+      console.log("2 "+node.sibling.has_children)
+      return true;
+    }
+    else {
+      console.log("3 ")
+      return node.parent.sibling.children[0].find_sibling_with_children(node.parent.sibling.children[0], level)
+    }
+    console.log("out")
+    return false;
+  }
+
+
   create_table(table_id){
     // если это первый вход - обнуляем таблицу
     if (this.level == 0){
