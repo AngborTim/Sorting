@@ -117,20 +117,21 @@ class tree_node {
     }
   }
 
-  get_nodes_with_children(node, level, nodes){
-    if (node.has_children && node.level < level){
-      node.children.forEach(element => {
-        element.get_nodes_with_children(element, level, nodes);
-      });
-    }
-    else {
-      console.log(node.level, node.has_children)
-      if (node.level == level && node.has_children){
-        nodes.push(node);
-        return nodes;
+
+  get_if_node_has_children(node, level) {
+    if (node.has_children) {
+      if (node.level === level) {
+        return true;
+      }
+      if (node.level < level) {
+        for (const element of node.children) {
+          if (element.get_if_node_has_children(element, level)) {
+            return true;
+          }
+        }
       }
     }
-    return nodes;
+    return false;
   }
 
 
