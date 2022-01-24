@@ -32,11 +32,9 @@
 
 </div>
 </form>
+<button class="btn btn-outline-secondary" id="create_table">Create table</button>
 
-
-
-
-  <table id ="tree_table" class="table">
+<table id ="tree_table" class="table">
     
   </table>
 
@@ -50,6 +48,14 @@
 let count = 2;
 let numbers_array =[];
 let root = [];
+
+$("#create_table").on('click', ()=>{
+
+  if (root.length !=0){
+  root.create_table("tree_table");
+}
+else alert("Array is empty")
+})
 
 
 $("#main_input").submit('submit', () =>{
@@ -134,44 +140,6 @@ class tree_node {
     return false;
   }
 
-
-  get_nodes_by_level(node, level, nodes){
-    if (node.has_children && node.level < level){
-      node.children.forEach(element => {
-        element.get_nodes_by_level(element, level, nodes);
-      });
-    }
-    else {
-      if (node.level == level){
-        nodes.push(node);
-        return nodes;
-      }
-    }
-    return nodes;
-  }
-
-
-
-  find_sibling_with_children(node, level){
-    alert("node.sibling.has_children "+node.sibling.has_children);
-    alert("node.parent.sibling.children[0].has_children "+node.parent.sibling.children[0].has_children)
-    if (node.sibling.has_children){
-      console.log("1 "+node.sibling.has_children)
-      return true;
-    }
-    else if (node.parent.sibling.children[0].has_children){
-      console.log("2 "+node.sibling.has_children)
-      return true;
-    }
-    else {
-      console.log("3 ")
-      return node.parent.sibling.children[0].find_sibling_with_children(node.parent.sibling.children[0], level)
-    }
-    console.log("out")
-    return false;
-  }
-
-
   create_table(table_id){
     // если это первый вход - обнуляем таблицу
     if (this.level == 0){
@@ -185,12 +153,10 @@ class tree_node {
     let zzzz = $("tr#level"+this.level+" > td#"+this.branch).length;
     // если ячейка на этом уровне и с таким id не существует
     if (zzzz == 0){
-      $("tr#level"+this.level).append($("<td class='cell border' data-toggle='tooltip' data-placement='top' title='Level "+this.level+"' id='"+this.branch+this.n_array.join("")+ "'>"+this.n_array+"</td>"));
+      $("tr#level"+this.level).append($("<td class='cell border' data-toggle='tooltip' data-placement='top' colspan='"+this.n_array.length+"'' id='"+this.branch+this.n_array.join("")+ "'>"+this.n_array+"</td>"));
     } 
 
-
-    console.log( this.n_array , this.has_children)    
-    if (this.n_array.length == 1 && (this.has_children || this.sibling.has_children)){
+    if (this.n_array.length == 1 && (this.get_if_node_has_children(this.get_root(), this.level))){
       if ($('tr#level'+(this.level+1)).length == 0){
           $("#"+table_id).append($("<tr id='level"+(this.level+1)+"'></tr>"))
       } 
