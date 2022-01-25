@@ -48,6 +48,8 @@
 let count = 2;
 let numbers_array =[];
 let root = [];
+let show_tree_delay = 500;
+let tree_faidto_delay = 1000;
 
 $("#create_table").on('click', ()=>{
 
@@ -95,6 +97,7 @@ class tree_node {
       this.level = 0;
     }
     // запускаем создание дерева
+    this.cell_id = this.branch+this.n_array.join("");
     this.child();
   }
   child() {
@@ -154,7 +157,7 @@ class tree_node {
     // если ячейка на этом уровне и с таким id не существует
     if (zzzz == 0){
     // выводим с замедлением
-      $("tr#level"+this.level).append($("<td class='cell border' data-toggle='tooltip' data-placement='top' colspan='"+this.n_array.length+"' id='"+this.branch+this.n_array.join("")+ "'>"+this.n_array.join(", ")+"</td>").hide().delay(1000*this.level).fadeTo(1000, 1));
+      $("tr#level"+this.level).append($("<td class='cell border' data-toggle='tooltip' data-placement='top' colspan='"+this.n_array.length+"' id='"+this.cell_id+ "'>"+this.n_array.join(", ")+"</td>").hide().delay(show_tree_delay*this.level).fadeTo(tree_faidto_delay, 1));
     } 
 
     if (this.n_array.length == 1 && (this.get_if_node_has_children(this.get_root(), this.level))){
@@ -219,6 +222,9 @@ class tree_node {
       // работаем с левой веткой и только если правый sibling тоже leaf
       if (this.branch == "left" && !this.sibling.has_children) {
         let tmp =[]
+        $("#"+this.cell_id+"").css("background-color", "grey")
+        $("#"+this.sibling.cell_id+"").css("background-color", "silver")
+
         while (this.n_array.length != 0 && this.sibling.n_array != 0) {
           // пока какой-то из массивов не исчерпается 
           if (this.n_array[0] < this.sibling.n_array[0]) {
@@ -228,6 +234,9 @@ class tree_node {
           }
           else {
             // если значение правого массива меньше
+            
+            //тут каша получается. если ячейки из двух элементов, то уже бред
+            //$("#"+this.cell_id+"").before($("#"+this.sibling.cell_id+""));
             tmp.push(this.sibling.n_array.shift());
           }
         }
@@ -241,6 +250,7 @@ class tree_node {
         // удаляем оба нода, так как их значени е перенесено в parent
         this.parent.n_array = [];
         this.parent.n_array = tmp.flat();
+        //$("#"+this.parent.cell_id+"").text(this.parent.n_array.join(", "))
         this.sibling.delete();
         this.delete();
       }
