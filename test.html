@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<HTML>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Sorting</title>
+</head>
+
+<body>
+
+
+    <h1>Sorting</h1>
+
+</body>
+
+<script>
+    let count = 2;
+    let numbers_array = [];
+    let root = [];
+
+class tree_node {
+    constructor(n_array, parent) {
+        this.n_array = n_array;
+        this.has_children = false;
+        this.children = [];
+        // при создании экземпляра класса то parent == null
+        if (parent != null) {
+            this.parent = parent;
+            this.level = this.parent.level + 1;
+        }
+        else {
+            this.level = 0;
+        }
+        // run the tree
+        this.child();
+    }
+    child() {
+        if (this.n_array.length != 1) {
+            this.has_children = true;
+            let m = Math.floor(this.n_array.length / 2);
+            let l = this.n_array.slice(0, m);
+            let r = this.n_array.slice(m);
+            const left = new tree_node(l, this);
+            const right = new tree_node(r, this);
+            this.children.push(left, right);
+        }
+        else return 0
+    }
+
+ 
+
+    get_if_node_has_children(node, level) {
+    console.log(node.level, node.has_children)
+    if (node.has_children) {
+        if (node.level === level) {
+            return true;
+        }
+        if (node.level < level) {
+            for (const element of node.children) {
+                if (element.get_if_node_has_children(element, level)) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+    get_if_node_has_children(node, level) {
+    console.log(node.level, node.has_children)
+    if (node.has_children && node.level < level) {
+        console.log("in loop")
+        for (let element of node.children) { 
+            // *** #1, using `for-of` instead of `forEach` so we can return below
+            
+            if (element.get_if_node_has_children(element, level)) {     // *** #2, only return here if you got `true`
+                return true;    // *** 
+            }                   // *** 
+        }
+        return false; // *** #2 part 2 -- didn't find it anywhere, return `false`
+    } else {
+        console.log("first else")
+        if (node.level == level && node.has_children) {
+            console.log("node.level == level && node.has_children " + node.n_array)
+            return true;
+        } else {
+            console.log("return false")
+            return false;
+        }
+    }
+}
+
+
+
+    get_nodes_with_children_v1(node, level) {
+        console.log(node.level, node.has_children)
+
+        if (node.has_children && node.level < level) {
+            console.log("in loop")
+            node.children.forEach(element => {
+                return element.get_nodes_with_children_v1(element, level);
+            });
+        }
+        else {
+            console.log("first else")
+            if (node.level == level && node.has_children) {
+                console.log("node.level == level && node.has_children " + node.n_array)
+                return true;
+            }
+            else {
+                console.log("return false")
+                return false;
+            }
+        }
+    }
+
+    show() {
+        console.log(this.n_array + " | Level: " + this.level + ". " + this.branch + " Has children = " + this.has_children);
+        if (this.has_children) {
+            this.children.forEach(element => {
+                return element.show();
+            });
+        }
+        else {
+            return 0;
+        }
+    }
+    // CLASS END ===========================
+}
+
+    root = new tree_node([1, 3, 5, 7, 9,])
+
+</script>
+
+</HTML>
