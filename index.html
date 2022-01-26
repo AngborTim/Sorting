@@ -36,8 +36,6 @@
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
 
-
-
 <div class="container justify-content-center"> 
 
   <table class="table">
@@ -191,8 +189,8 @@ class tree_node {
     let zzzz = $("tr#level"+this.level+" > td#"+this.branch).length;
     // если ячейка на этом уровне и с таким id не существует
     if (zzzz == 0){
-    // выводим с замедлением
-      $("tr#level"+this.level).append($("<td class='cell border' data-toggle='tooltip' data-placement='top' colspan='"+this.n_array.length+"' id='"+this.cell_id+ "'>"+this.n_array.join(", ")+"</td>").hide().delay(show_tree_delay*this.level).fadeTo(tree_faidto_delay, 1));
+      // создаем таблицу, но не отображаем
+      $("tr#level"+this.level).append($("<td class='cell border' data-toggle='tooltip' data-placement='top' colspan='"+this.n_array.length+"' id='"+this.cell_id+ "'>"+this.n_array.join(", ")+"</td>")).hide();
     } 
 
     if (this.n_array.length == 1 && (this.get_if_node_has_children(this.get_root(), this.level))){
@@ -213,7 +211,6 @@ class tree_node {
         return 0;
       }
   }
-
 
   delete(){
     try{
@@ -243,7 +240,6 @@ class tree_node {
     while (this.has_children == true){
       this.merge();
     }
-    //console.log(" Level " + this.level + ". [" + this.n_array + "]")
     return
   }
 
@@ -257,8 +253,6 @@ class tree_node {
       // работаем с левой веткой и только если правый sibling тоже leaf
       if (this.branch == "left" && !this.sibling.has_children) {
         let tmp =[]
-        $("#"+this.cell_id+"").css("background-color", "grey")
-        $("#"+this.sibling.cell_id+"").css("background-color", "silver")
 
         while (this.n_array.length != 0 && this.sibling.n_array != 0) {
           // пока какой-то из массивов не исчерпается 
@@ -285,7 +279,6 @@ class tree_node {
         // удаляем оба нода, так как их значени е перенесено в parent
         this.parent.n_array = [];
         this.parent.n_array = tmp.flat();
-        //$("#"+this.parent.cell_id+"").text(this.parent.n_array.join(", "))
         this.sibling.delete();
         this.delete();
       }
@@ -332,6 +325,12 @@ function shuffle(n_array){
     return 0;
   }
 }
+
+
+//.delay(show_tree_delay*this.level).fadeTo(tree_faidto_delay, 1)
+//$("#"+this.cell_id+"").css("background-color", "grey")
+//        $("#"+this.sibling.cell_id+"").css("background-color", "silver")
+        //$("#"+this.parent.cell_id+"").text(this.parent.n_array.join(", "))
 
 </script>
 
