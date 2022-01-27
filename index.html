@@ -97,7 +97,7 @@
   let numbers_array = [];
   let root = [];
   let show_tree_delay = 1000;
-  let tree_faidto_delay = 1000;
+  let tree_faidto_delay = 800;
   let order_id = 0;
 
   $("#test_btn").on('click', () => {
@@ -149,7 +149,7 @@
   function color_spans($span, color){
     $($span).delay(1000 * delay_count).animate({ color: color })
         .queue(function () {
-          $(this).addClass("fw-bold").dequeue();
+          $(this).addClass("fw-bold").delay(1000 * delay_count).dequeue();
         });
   }
 
