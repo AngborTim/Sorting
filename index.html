@@ -1,20 +1,21 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <HTML>
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="css/4.6.1_bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="css/4.6.1_bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 
-    <link href="pics/favicon.ico" rel="icon">
-  
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/popper.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    
+  <link href="pics/favicon.ico" rel="icon">
 
-    <title>Sorting</title>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/popper.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+
+  <title>Sorting</title>
 </head>
 
 <body>
@@ -22,194 +23,194 @@
 
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Shaker</button>
+      <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab"
+        aria-controls="home" aria-selected="true">Shaker</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Merge sort</button>
+      <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+        role="tab" aria-controls="profile" aria-selected="false">Merge sort</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab"
+        aria-controls="contact" aria-selected="false">Contact</button>
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
 
+    <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-
-<div class="container justify-content-center"> 
-
-  <table class="table">
-    <tr id="numbers">
-    </tr>
-    <tr id="buffer">
-    </tr>
-  </table>
-<input id="btn_shaker" type="button" class="btn btn-outline-primary btn-block" value="Shaker">
-</div>
-</div>
-<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
-  <div class="container justify-content-center"> 
-    <form id="main_input">
-    <div class="form-group">
-    <label for="n_array">Enter how many numbers should be sorted</label><br>
-    <input id = "n_array" type="number" min="2" required>
-    <button class="btn btn-outline-primary ">Enter</button>
-    
+      <div class="container justify-content-center">
+        <table class="table">
+          <tr id="numbers">
+          </tr>
+          <tr id="buffer">
+          </tr>
+        </table>
+        <input id="btn_shaker" type="button" class="btn btn-outline-primary btn-block" value="Shaker">
+      </div>
     </div>
-    </form>
-    <button class="btn btn-outline-secondary" id="create_table">Create table</button>
-    
-    <table id ="tree_table" class="table">
-        
-    </table>
-    
-    <input id="btn_sort" type="button" class="btn btn-outline-primary btn-block" value="Merge sort">
-    
+ 
+    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+      <div class="container justify-content-center">
+        <form id="main_input">
+          <div class="form-group">
+            <label for="n_array">Enter how many numbers should be sorted</label><br>
+            <input id="n_array" type="number" min="2" required>
+            <button class="btn btn-outline-primary ">Enter</button>
+          </div>
+        </form>
+        <button class="btn btn-outline-secondary" id="create_table">Create table</button>
+
+        <table id="tree_table" class="table">
+        </table>
+
+        <input id="btn_sort" type="button" class="btn btn-outline-primary btn-block" value="Merge sort">
+      </div>
     </div>
 
 
-</div>
-<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">fdfv dfg ewrg sfdvb sdfb wrht wrgb fdvcb</div>
-</div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">fdfv dfg ewrg sfdvb sdfb wrht
+      wrgb fdvcb</div>
+  </div>
 </body>
 
 <script>
-let count = 20;
-let numbers_array_shaker = Array.from(Array(count).keys());
-let a = 0;
-let delay = 100;
-let flag = false;
-let last_change;
+  let count = 20;
+  let numbers_array_shaker = Array.from(Array(count).keys());
+  let a = 0;
+  let delay = 100;
+  let flag = false;
+  let last_change;
 
 
-//  === MERGE ============ 
+  //  === MERGE ============ 
 
-let count_tree = 2;
-let numbers_array =[];
-let root = [];
-let show_tree_delay = 500;
-let tree_faidto_delay = 1000;
+  let count_tree = 2;
+  let numbers_array = [];
+  let root = [];
+  let show_tree_delay = 500;
+  let tree_faidto_delay = 1000;
 
-$("#create_table").on('click', ()=>{
+  $("#create_table").on('click', () => {
 
-  if (root.length !=0){
-  root.create_table("tree_table");
-}
-else alert("Array is empty")
-})
-
-
-$("#main_input").submit('submit', () =>{
-  count_tree = parseInt($("#n_array").val());
-  // создаем массив чисел
-  numbers_array = Array.from(Array(count_tree).keys());
-  // перемешиваем массив
-  shuffle(Object.assign([],numbers_array));
-  // создаем дерево и помещаем в него массив
-  root = new tree_node(numbers_array,null); 
-  // отображаем в таблице
-  event.preventDefault();
-})
-
-
-
-class tree_node {
-  constructor(n_array, parent, branch) {
-    this.n_array = n_array;
-    if (branch != null ){
-      this.branch = branch;
+    if (root.length != 0) {
+      root.create_table("tree_table");
     }
-    else {
-      this.branch = null;
-    }
-    this.has_children = false;
-    this.parent = null;
-    this.children = [];
-    this.sibling = null;
-    // при создании экземпляра класса то parent == null
-    if (parent != null ){
-      this.parent = parent;
-      this.level = this.parent.level + 1;
-    }
-    else {
-      this.level = 0;
-    }
-    // запускаем создание дерева
-    this.cell_id = this.branch+this.n_array.join("");
-    this.child();
-  }
-  child() {
-    if (this.n_array.length !=1){
-      this.has_children = true;
-      let m = Math.floor(this.n_array.length / 2);
-      let l = this.n_array.slice(0,m);
-      let r = this.n_array.slice(m);
-      const left = new tree_node(l, this, "left");
-      const right = new tree_node(r,this, "right");
-
-      left.sibling = right;
-      right.sibling = left;
-      this.children.push(left , right);
-    }
-    else return 0
-  }
-  
-  get_root(){
-    // возвращаем root 
-    if (this.parent == null){
-      return this;
-    }
-    else {
-      return this.parent.get_root(this.parent)
-    }
-  }
+    else alert("Array is empty")
+  })
 
 
-  get_if_node_has_children(node, level) {
-    if (node.has_children) {
-      if (node.level === level) {
-        return true;
+  $("#main_input").submit('submit', () => {
+    count_tree = parseInt($("#n_array").val());
+    // создаем массив чисел
+    numbers_array = Array.from(Array(count_tree).keys());
+    // перемешиваем массив
+    shuffle(Object.assign([], numbers_array));
+    // создаем дерево и помещаем в него массив
+    root = new tree_node(numbers_array, null);
+    // отображаем в таблице
+    event.preventDefault();
+  })
+
+
+
+  class tree_node {
+    constructor(n_array, parent, branch) {
+      this.n_array = n_array;
+      if (branch != null) {
+        this.branch = branch;
       }
-      if (node.level < level) {
-        for (const element of node.children) {
-          if (element.get_if_node_has_children(element, level)) {
-            return true;
+      else {
+        this.branch = null;
+      }
+      this.has_children = false;
+      this.parent = null;
+      this.children = [];
+      this.sibling = null;
+      // при создании экземпляра класса то parent == null
+      if (parent != null) {
+        this.parent = parent;
+        this.level = this.parent.level + 1;
+      }
+      else {
+        this.level = 0;
+      }
+      // запускаем создание дерева
+      this.cell_id = this.branch + this.n_array.join("");
+      this.child();
+    }
+    child() {
+      if (this.n_array.length != 1) {
+        this.has_children = true;
+        let m = Math.floor(this.n_array.length / 2);
+        let l = this.n_array.slice(0, m);
+        let r = this.n_array.slice(m);
+        const left = new tree_node(l, this, "left");
+        const right = new tree_node(r, this, "right");
+
+        left.sibling = right;
+        right.sibling = left;
+        this.children.push(left, right);
+      }
+      else return 0
+    }
+
+    get_root() {
+      // возвращаем root 
+      if (this.parent == null) {
+        return this;
+      }
+      else {
+        return this.parent.get_root(this.parent)
+      }
+    }
+
+
+    get_if_node_has_children(node, level) {
+      if (node.has_children) {
+        if (node.level === level) {
+          return true;
+        }
+        if (node.level < level) {
+          for (const element of node.children) {
+            if (element.get_if_node_has_children(element, level)) {
+              return true;
+            }
           }
         }
       }
+      return false;
     }
-    return false;
-  }
 
-  create_table(table_id){
-    // если это первый вход - обнуляем таблицу
-    if (this.level == 0){
-      $("#"+table_id).html("");
-    }
-    // если ряд еще не был создан - создаем
-    if ($('tr#level'+this.level).length == 0){
-      $("#"+table_id).append($("<tr id='level"+this.level+"'></tr>"))
-    } 
+    create_table(table_id) {
+      // если это первый вход - обнуляем таблицу
+      if (this.level == 0) {
+        $("#" + table_id).html("");
+      }
+      // если ряд еще не был создан - создаем
+      if ($('tr#level' + this.level).length == 0) {
+        $("#" + table_id).append($("<tr id='level" + this.level + "'></tr>"))
+      }
 
-    let zzzz = $("tr#level"+this.level+" > td#"+this.branch).length;
-    // если ячейка на этом уровне и с таким id не существует
-    if (zzzz == 0){
-    // выводим с замедлением
-      $("tr#level"+this.level).append($("<td class='cell border' data-toggle='tooltip' data-placement='top' colspan='"+this.n_array.length+"' id='"+this.cell_id+ "'>"+this.n_array.join(", ")+"</td>").hide().delay(show_tree_delay*this.level).fadeTo(tree_faidto_delay, 1));
-    } 
+      let zzzz = $("tr#level" + this.level + " > td#" + this.branch).length;
+      // если ячейка на этом уровне и с таким id не существует
+      if (zzzz == 0) {
+        // выводим с замедлением
+        $("tr#level" + this.level).append($("<td class='cell border' data-toggle='tooltip' data-placement='top' colspan='" + this.n_array.length + "' id='" + this.cell_id + "'>" + this.n_array.join(", ") + "</td>").hide().delay(show_tree_delay * this.level).fadeTo(tree_faidto_delay, 1));
+      }
 
-    if (this.n_array.length == 1 && (this.get_if_node_has_children(this.get_root(), this.level))){
-      if ($('tr#level'+(this.level+1)).length == 0){
+      if (this.n_array.length == 1 && (this.get_if_node_has_children(this.get_root(), this.level))) {
+        if ($('tr#level' + (this.level + 1)).length == 0) {
           // для целостности таблицы выводим пустые ячейки под конечными элементами, если у их сиблингов есть потомки
-          $("#"+table_id).append($("<tr id='level"+(this.level+1)+"'></tr>"))
-      } 
-      $("tr#level"+(this.level+1)).append($("<td class='cell border'></td>"));
-            
-    }
+          $("#" + table_id).append($("<tr id='level" + (this.level + 1) + "'></tr>"))
+        }
+        $("tr#level" + (this.level + 1)).append($("<td class='cell border'></td>"));
 
-    if (this.has_children){
+      }
+
+      if (this.has_children) {
         this.children.forEach(element => {
           element.create_table(table_id);
         });
@@ -217,227 +218,227 @@ class tree_node {
       else {
         return 0;
       }
-  }
+    }
 
 
-  delete(){
-    try{
-      if (this.has_children) {
-        throw "Can't delete. Has children."
-      }
-      else {
-        delete this.n_array;
-        if (this.branch == "left"){
-          this.parent.children.shift();
+    delete() {
+      try {
+        if (this.has_children) {
+          throw "Can't delete. Has children."
         }
         else {
-          this.parent.children.pop();
-        }
-        if (this.parent.children.length == 0){
-            this.parent.has_children = false;
-          }
-        delete this.sibling;
-      }
-    }
-    catch(err){
-      console.log("Error: "+err);
-    }
-  }
-
-  sort(){
-    while (this.has_children == true){
-      this.merge();
-    }
-    //console.log(" Level " + this.level + ". [" + this.n_array + "]")
-    return
-  }
-
-  merge(){
-    if (this.has_children){
-      this.children.forEach(element => {
-        return element.merge();
-        });
-    }
-    else {
-      // работаем с левой веткой и только если правый sibling тоже leaf
-      if (this.branch == "left" && !this.sibling.has_children) {
-        let tmp =[]
-        $("#"+this.cell_id+"").css("background-color", "grey")
-        $("#"+this.sibling.cell_id+"").css("background-color", "silver")
-
-        while (this.n_array.length != 0 && this.sibling.n_array != 0) {
-          // пока какой-то из массивов не исчерпается 
-          if (this.n_array[0] < this.sibling.n_array[0]) {
-            // если значение левого массива меньше
-            tmp.push(this.n_array[0]);
-            this.n_array.shift();
+          delete this.n_array;
+          if (this.branch == "left") {
+            this.parent.children.shift();
           }
           else {
-            // если значение правого массива меньше
-            
-            //тут каша получается. если ячейки из двух элементов, то уже бред
-            //$("#"+this.cell_id+"").before($("#"+this.sibling.cell_id+""));
-            tmp.push(this.sibling.n_array.shift());
+            this.parent.children.pop();
           }
+          if (this.parent.children.length == 0) {
+            this.parent.has_children = false;
+          }
+          delete this.sibling;
         }
-        if (this.n_array.length == 0) {
-          // если в одном из массивов остались значения
-          tmp.push(this.sibling.n_array)
-        }
-        else {
-          tmp.push(this.n_array);
-        }
-        // удаляем оба нода, так как их значени е перенесено в parent
-        this.parent.n_array = [];
-        this.parent.n_array = tmp.flat();
-        //$("#"+this.parent.cell_id+"").text(this.parent.n_array.join(", "))
-        this.sibling.delete();
-        this.delete();
+      }
+      catch (err) {
+        console.log("Error: " + err);
       }
     }
-      return 0;
-  }
-  
-  show(){
-    console.log(this.n_array + " | Level: " + this.level + ". "+ this.branch + " Has children = " + this.has_children);
-      if (this.has_children){
+
+    sort() {
+      while (this.has_children == true) {
+        this.merge();
+      }
+      //console.log(" Level " + this.level + ". [" + this.n_array + "]")
+      return
+    }
+
+    merge() {
+      if (this.has_children) {
         this.children.forEach(element => {
-          return  element.show();
+          return element.merge();
+        });
+      }
+      else {
+        // работаем с левой веткой и только если правый sibling тоже leaf
+        if (this.branch == "left" && !this.sibling.has_children) {
+          let tmp = []
+          $("#" + this.cell_id + "").css("background-color", "grey")
+          $("#" + this.sibling.cell_id + "").css("background-color", "silver")
+
+          while (this.n_array.length != 0 && this.sibling.n_array != 0) {
+            // пока какой-то из массивов не исчерпается 
+            if (this.n_array[0] < this.sibling.n_array[0]) {
+              // если значение левого массива меньше
+              tmp.push(this.n_array[0]);
+              this.n_array.shift();
+            }
+            else {
+              // если значение правого массива меньше
+
+              //тут каша получается. если ячейки из двух элементов, то уже бред
+              //$("#"+this.cell_id+"").before($("#"+this.sibling.cell_id+""));
+              tmp.push(this.sibling.n_array.shift());
+            }
+          }
+          if (this.n_array.length == 0) {
+            // если в одном из массивов остались значения
+            tmp.push(this.sibling.n_array)
+          }
+          else {
+            tmp.push(this.n_array);
+          }
+          // удаляем оба нода, так как их значени е перенесено в parent
+          this.parent.n_array = [];
+          this.parent.n_array = tmp.flat();
+          //$("#"+this.parent.cell_id+"").text(this.parent.n_array.join(", "))
+          this.sibling.delete();
+          this.delete();
+        }
+      }
+      return 0;
+    }
+
+    show() {
+      console.log(this.n_array + " | Level: " + this.level + ". " + this.branch + " Has children = " + this.has_children);
+      if (this.has_children) {
+        this.children.forEach(element => {
+          return element.show();
         });
       }
       else {
         return 0;
       }
     }
-// CLASS END ===========================
-}
+    // CLASS END ===========================
+  }
 
 
-$("#btn_sort").on('click', ()=>{
-    root.sort(); 
+  $("#btn_sort").on('click', () => {
+    root.sort();
   })
 
 
-function shuffle(n_array){
-  // пока длинна временного массива больше 1
-  if (n_array.length-1>1){
-    // получаем случайное число от 1 до последнего индекса массива цифр
-    let z = Math.floor(Math.random()*(n_array.length-1))
-    // меняем местами цифры между последней позицией и позицией z
-    n_array[z] = numbers_array[n_array.length-1]
-    numbers_array[n_array.length-1] = numbers_array[z];
-    numbers_array[z] = n_array[z];
-    // убираем последнюю позицию из временного массива
-    n_array.pop();
-    // передаем в рекурсию
-    shuffle(n_array);
+  function shuffle(n_array) {
+    // пока длинна временного массива больше 1
+    if (n_array.length - 1 > 1) {
+      // получаем случайное число от 1 до последнего индекса массива цифр
+      let z = Math.floor(Math.random() * (n_array.length - 1))
+      // меняем местами цифры между последней позицией и позицией z
+      n_array[z] = numbers_array[n_array.length - 1]
+      numbers_array[n_array.length - 1] = numbers_array[z];
+      numbers_array[z] = n_array[z];
+      // убираем последнюю позицию из временного массива
+      n_array.pop();
+      // передаем в рекурсию
+      shuffle(n_array);
+    }
+    else {
+      // если временный массив - одна цифра, выходим из рекурсии
+      return 0;
+    }
   }
-  else{
-    // если временный массив - одна цифра, выходим из рекурсии
-    return 0;
-  }
-}
 
-// =============== MERGE END
+  // =============== MERGE END
 
-$(document).ready(function() {
-  shuffle_shaker(Object.assign([],numbers_array_shaker));
-  new_numbers();
-});
+  $(document).ready(function () {
+    shuffle_shaker(Object.assign([], numbers_array_shaker));
+    new_numbers();
+  });
 
 
-$("#btn_shaker").on('click', ()=>{
-  loop_with_delay(numbers_array_shaker) ;
+  $("#btn_shaker").on('click', () => {
+    loop_with_delay(numbers_array_shaker);
   })
 
 
-function loop_with_delay(n_array){
-  setTimeout(function(){
-    if (comparation(a)){
-      flag = true;
+  function loop_with_delay(n_array) {
+    setTimeout(function () {
+      if (comparation(a)) {
+        flag = true;
+      }
+      a++;
+      if (a < count) {
+        loop_with_delay(n_array);
+      }
+      else if (flag) {
+        flag = false;
+        a = 0;
+        count = last_change; // сокращает счетчик соответственно последней позиции
+        // когда была произведена перестановка
+        green_color(2);
+        loop_with_delay(n_array);
+      }
+      else if (!flag) {
+        green_color(1);
+        alert("End");
+        return;
+      }
+    }, delay)
+    return
+  }
+
+  function comparation(a) {
+    if ($("#" + "n" + a).css("background-color") == "rgb(112, 128, 144)") {
+      $("#" + "n" + a).css("background-color", "transparent");
     }
-    a++;
-    if (a < count){
-      loop_with_delay(n_array);
+    else {
+      $("#" + "n" + a).css("background-color", "slategrey");
     }
-    else if (flag) {
-      flag = false;
-      a = 0;
-      count = last_change; // сокращает счетчик соответственно последней позиции
-      // когда была произведена перестановка
-      green_color(2);
-      loop_with_delay(n_array);
+    if (numbers_array_shaker[a] > numbers_array_shaker[a + 1] && a + 1 < numbers_array_shaker.length) {
+      // устанавливаем флаг замены
+      let tmp = numbers_array_shaker[a];
+      numbers_array_shaker[a] = numbers_array_shaker[a + 1];
+      change_cell(a, numbers_array_shaker[a + 1], a);
+      numbers_array_shaker[a + 1] = tmp;
+      change_cell(a + 1, tmp, a);
+      last_change = a; // сохраняем позицию в массиве, когда была сделана перестановка
+      return true;
     }
-    else if (!flag ){
-      green_color(1);
-      alert("End");
-      return;
+    else {
+      return false;
     }
-  }, delay)
-  return
-}
+  }
 
-function comparation(a){
-  if ($("#"+"n"+a).css("background-color") == "rgb(112, 128, 144)"){
-    $("#"+"n"+a).css("background-color", "transparent");
+  function green_color(all) {
+    if (all == 1) z = 0;
+    else z = count + 1;
+    for (let i = z; i < numbers_array_shaker.length; i++) {
+      $("#" + "n" + i).css("background-color", "mediumspringgreen");
+    }
   }
-  else {
-    $("#"+"n"+a).css("background-color", "slategrey");
-  }
-  if (numbers_array_shaker[a] > numbers_array_shaker[a+1] && a+1 < numbers_array_shaker.length) {
-    // устанавливаем флаг замены
-    let tmp = numbers_array_shaker[a];
-    numbers_array_shaker[a] = numbers_array_shaker[a+1];
-    change_cell(a, numbers_array_shaker[a+1], a);
-    numbers_array_shaker[a+1] = tmp;
-    change_cell(a+1, tmp, a);
-    last_change = a; // сохраняем позицию в массиве, когда была сделана перестановка
-    return true;
-  }
-  else {
-    return false;
-  }
-}
 
-function green_color(all){
-  if (all == 1) z = 0;
-  else z = count+1;
-  for (let i = z; i < numbers_array_shaker.length; i++){
-    $("#"+"n"+i).css("background-color", "mediumspringgreen");
+  function shuffle_shaker(n_array) {
+    // пока длинна временного массива больше 1
+    if (n_array.length - 1 > 1) {
+      // получаем случайное число от 1 до последнего индекса массива цифр
+      let z = Math.floor(Math.random() * (n_array.length - 1))
+      // меняем местами цифры между последней позицией и позицией z
+      n_array[z] = numbers_array_shaker[n_array.length - 1]
+      numbers_array_shaker[n_array.length - 1] = numbers_array_shaker[z];
+      numbers_array_shaker[z] = n_array[z];
+      // убираем последнюю позицию из временного массива
+      n_array.pop();
+      // передаем в рекурсию
+      shuffle_shaker(n_array);
+    }
+    else {
+      // если временный массив - одна цифра, выходим из рекурсии
+      return 0;
+    }
   }
-}
 
-function shuffle_shaker(n_array){
-  // пока длинна временного массива больше 1
-  if (n_array.length-1>1){
-    // получаем случайное число от 1 до последнего индекса массива цифр
-    let z = Math.floor(Math.random()*(n_array.length-1))
-    // меняем местами цифры между последней позицией и позицией z
-    n_array[z] = numbers_array_shaker[n_array.length-1]
-    numbers_array_shaker[n_array.length-1] = numbers_array_shaker[z];
-    numbers_array_shaker[z] = n_array[z];
-    // убираем последнюю позицию из временного массива
-    n_array.pop();
-    // передаем в рекурсию
-    shuffle_shaker(n_array);
+  function change_cell(index, value, delay) {
+    $("#" + "n" + index).text(value)
   }
-  else{
-    // если временный массив - одна цифра, выходим из рекурсии
-    return 0;
-  }
-}
 
-function change_cell(index, value, delay){
-  $("#"+"n"+index).text(value)
-}
-
-function new_numbers(){
-  for (let i = 0; i<count; i++){
-    let a = $("<td class='cell border' id='n"+i+"'></td>").text(numbers_array_shaker[i]);
-    $("#numbers").append(a);
-    $("#buffer").append("<td class='cell border' id='b"+i+"'></td>");
+  function new_numbers() {
+    for (let i = 0; i < count; i++) {
+      let a = $("<td class='cell border' id='n" + i + "'></td>").text(numbers_array_shaker[i]);
+      $("#numbers").append(a);
+      $("#buffer").append("<td class='cell border' id='b" + i + "'></td>");
+    }
   }
-}
 
 </script>
 
