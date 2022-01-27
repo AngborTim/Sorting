@@ -102,13 +102,14 @@
 
   $("#test_btn").on('click', () => {
     delay_count = 0;
-    //let $tr = $("#tree_table > tr");
-    //$tr.show();
-
+    let $tr = $("#tree_table > tr");
+    $tr.show();
+    let id = 0;
     // берем все TD с data-order_id (у пустых ячеек этого атрибута нет)
     get_span($('*[data-order_id]').length, 1);
+
   })
-  
+
   let delay_count = 0;
 
   function get_span(length, id) {
@@ -117,7 +118,6 @@
 
     let $cell = $('[data-order_id="' + id + '"]');
 
-    $($cell).parent().show();
     $($cell).delay(show_tree_delay*delay_count).fadeTo(tree_faidto_delay, 1)
 
     let $spans = $("span", $cell);
