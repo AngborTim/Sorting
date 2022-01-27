@@ -1,21 +1,23 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <HTML>
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="css/4.6.1_bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="css/bootstrap-5.0.2.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 
-    <link href="pics/favicon.ico" rel="icon">
-  
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/popper.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/shaker.js"></script>
-    
+  <link href="pics/favicon.ico" rel="icon">
 
-    <title>Sorting</title>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/jquery-ui-1.12.1.js"></script>
+  <script src="js/popper.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/shaker.js"></script>
+
+
+  <title>Sorting</title>
 </head>
 
 <body>
@@ -23,65 +25,69 @@
 
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Shaker</button>
+      <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab"
+        aria-controls="home" aria-selected="true">Shaker</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Merge sort</button>
+      <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+        role="tab" aria-controls="profile" aria-selected="false">Merge sort</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab"
+        aria-controls="contact" aria-selected="false">Contact</button>
     </li>
   </ul>
 
 
-<div class="tab-content" id="myTabContent">
+  <div class="tab-content" id="myTabContent">
 
-  <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <div class="container justify-content-center">
+    <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <div class="container justify-content-center">
 
-      <table class="table">
-        <tr id="numbers">
-        </tr>
-        <tr id="buffer">
-        </tr>
-      </table>
-      <input id="btn_shaker" type="button" class="btn btn-outline-primary btn-block" value="Shaker">
+        <table class="table">
+          <tr id="numbers">
+          </tr>
+          <tr id="buffer">
+          </tr>
+        </table>
+        <input id="btn_shaker" type="button" class="btn btn-outline-primary btn-block" value="Shaker">
 
-    </div>
-  </div>
-
-  <!--   MERGE   -->
-
-  <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
-    <div class="container justify-content-center">
-      <form id="main_input">
-        <div class="form-group">
-          <label for="n_array">Enter how many numbers should be sorted</label><br>
-          <input id="n_array" type="number" min="2" required>
-          <button class="btn btn-outline-primary ">Enter</button>
-
-        </div>
-      </form>
-      <button class="btn btn-outline-secondary" id="create_table">Create table</button>
-
-      <table id="tree_table" class="table">
-
-      </table>
-
-      <input id="btn_sort" type="button" class="btn btn-outline-primary btn-block" value="Merge sort">
-      <button id="test_btn" class="btn btn-outline-info">TEST</button>
+      </div>
     </div>
 
+    <!--   MERGE   -->
+
+    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+      <div class="container justify-content-center">
+        <form id="main_input">
+          <div class="form-group">
+            <label for="n_array">Enter how many numbers should be sorted</label><br>
+            <input id="n_array" type="number" min="2" required>
+            <button class="btn btn-outline-primary ">Enter</button>
+
+          </div>
+        </form>
+        <button class="btn btn-outline-secondary" id="create_table">Create table</button>
+
+        <table id="tree_table" class="table">
+
+        </table>
+
+        <!--      <input id="btn_sort" type="button" class="btn btn-outline-primary btn-block" value="Merge sort">-->
+
+        <button id="test_btn" class="btn btn-outline-info">TEST</button>
+      </div>
+
+
+    </div>
+
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">fdfv dfg ewrg sfdvb sdfb wrht
+      wrgb
+      fdvcb</div>
+
 
   </div>
-
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">fdfv dfg ewrg sfdvb sdfb wrht
-    wrgb
-    fdvcb</div>
-
-
-</div>
 
 </body>
 
@@ -94,44 +100,60 @@
   let tree_faidto_delay = 1000;
   let order_id = 0;
 
-    $("#test_btn").on('click', () => {
-     
-      let $tr = $("#tree_table > tr");
-      $tr.show();
+  $("#test_btn").on('click', () => {
+    delay_count = 0;
+    //let $tr = $("#tree_table > tr");
+    //$tr.show();
 
-      // берем все TD с data-order_id (у пустых ячеек этого атрибута нет)
-      get_span($('*[data-order_id]').length, 1);
-    })
-
+    // берем все TD с data-order_id (у пустых ячеек этого атрибута нет)
+    get_span($('*[data-order_id]').length, 1);
+  })
+  
+  let delay_count = 0;
 
   function get_span(length, id) {
-      if (id == length + 1) return;
+    delay_count++;
+    if (id == length + 1) return;
 
-      let $cell = $('[data-order_id="' + id + '"]');
-      let $spans = $("span", $cell);
-      let ln = $spans.length;
+    let $cell = $('[data-order_id="' + id + '"]');
 
-      let m = Math.floor(ln / 2);
-      let l = $spans.slice(0, m);
-      let r = $spans.slice(m);
+    $($cell).parent().show();
+    $($cell).delay(show_tree_delay*delay_count).fadeTo(tree_faidto_delay, 1)
 
-      if ($spans.length == 1) {
-        $($spans[0]).css("color", "blue");
-        return id
-      }
-      else {
+    let $spans = $("span", $cell);
+    let ln = $spans.length;
 
-        for (let i = 0; i < l.length; i++) {
-          $(l[i]).css("color", "red");
-        }
-        id = get_span(length, id + 1);
-        for (let i = 0; i < r.length; i++) {
-          $(r[i]).css("color", "green");
-        }
-        id = get_span(length, id + 1)
-        return id
-      }
+    let m = Math.floor(ln / 2);
+    let l = $spans.slice(0, m);
+    let r = $spans.slice(m);
+
+    if ($spans.length == 1) {
+      color_spans($spans[0],"blue");
+ 
+      return id
     }
+    else {
+
+      for (let i = 0; i < l.length; i++) {
+        color_spans(l[i],"red");
+      }
+      id = get_span(length, id + 1);
+      for (let i = 0; i < r.length; i++) {
+        color_spans(r[i],"green");
+      }
+      id = get_span(length, id + 1)
+      return id
+    }
+  }
+
+  function color_spans($span, color){
+    $($span).animate({ color: color }, 1000 * delay_count).delay(1000 * delay_count)
+        .queue(function () {
+          $(this).delay(1000 * delay_count).addClass("fw-bold").delay(1000).dequeue();
+        });
+  }
+
+
 
   $("#create_table").on('click', () => {
     if (root.length != 0) {
@@ -224,7 +246,7 @@
       return false;
     }
 
-    
+
 
     create_table(table_id) {
       // если это первый вход - обнуляем таблицу
@@ -242,7 +264,7 @@
       // если ячейка на этом уровне и с таким id не существует
       if (zzzz == 0) {
         // создаем таблицу, но не отображаем
-        $("tr#level" + this.level).append($("<td class='cell border' data-order_id='"+order_id+"' data-toggle='tooltip' data-placement='top' colspan='" + this.n_array.length + "' id='" + this.cell_id + "'><span id='s"+this.cell_id+"'>" + this.n_array.join("</span>, <span id='s"+this.cell_id+"'>") + "</span>(" + order_id + ")</td>")).hide();
+        $("tr#level" + this.level).append($("<td class='cell border' data-order_id='" + order_id + "' data-toggle='tooltip' data-placement='top' colspan='" + this.n_array.length + "' id='" + this.cell_id + "'><span>" + this.n_array.join("</span>,<span>") + "</span></td>").hide()).hide();
       }
 
       if (this.n_array.length == 1 && (this.get_if_node_has_children(this.get_root(), this.level))) {
