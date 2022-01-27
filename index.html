@@ -96,7 +96,7 @@
   let count_tree = 2;
   let numbers_array = [];
   let root = [];
-  let show_tree_delay = 500;
+  let show_tree_delay = 1000;
   let tree_faidto_delay = 1000;
   let order_id = 0;
 
@@ -147,9 +147,9 @@
   }
 
   function color_spans($span, color){
-    $($span).animate({ color: color }, 1000 * delay_count).delay(1000 * delay_count)
+    $($span).delay(1000 * delay_count).animate({ color: color })
         .queue(function () {
-          $(this).delay(1000 * delay_count).addClass("fw-bold").delay(1000).dequeue();
+          $(this).addClass("fw-bold").dequeue();
         });
   }
 
