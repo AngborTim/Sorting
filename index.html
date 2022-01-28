@@ -74,7 +74,7 @@
 
         </table>
         <table id="buffer_table"><tr><td>&NoBreak;</td></tr></table>
-        
+
         <input id="btn_sort" type="button" class="btn btn-outline-primary btn-block" value="Merge sort">
 
 
@@ -330,6 +330,15 @@
         // работаем с левой веткой и только если правый sibling тоже leaf
         if (this.branch == "left" && !this.sibling.has_children) {
           let tmp = []
+          
+          // TODO остановился на том, что нужно как-то отобразить merge
+          // думал работать с таблицей и ориентироваться на order_id 
+          // но оказалось, что просто иджти с конца не поможет, так
+          // как последовательность номеров не идентична 
+          // их распределению по дереву.
+          // можно конечно попробовать изменитьнумерацию, чтобы она давала нужную
+          // последовательность если сливать начиная с конца массива...
+          
           $("#" + this.cell_id + "").css("background-color", "grey")
           $("#" + this.sibling.cell_id + "").css("background-color", "silver")
 
