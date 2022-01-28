@@ -73,12 +73,12 @@
         <table id="tree_table" class="table">
 
         </table>
-
-        <!--      <input id="btn_sort" type="button" class="btn btn-outline-primary btn-block" value="Merge sort">-->
-
         <table id="buffer_table"><tr><td>&NoBreak;</td></tr></table>
+        
+        <input id="btn_sort" type="button" class="btn btn-outline-primary btn-block" value="Merge sort">
 
-        <button id="test_btn" class="btn btn-outline-info">TEST</button>
+
+
       </div>
 
 
@@ -104,17 +104,6 @@
 
   $("#buffer_table").fadeTo(0,0);
   
-  $("#test_btn").on('click', () => {
-    $("#buffer_table").fadeTo(0,1);
-    delay_count = 0;
-    let $tr = $("#tree_table > tr");
-    $tr.show();
-    let id = 0;
-    let spans_length = $('*[data-order_id]').length
-    // берем все TD с data-order_id (у пустых ячеек этого атрибута нет)
-    get_span(spans_length, 1);
-  })
-
   let delay_count = 0;
 
 
@@ -161,13 +150,21 @@
 
 
 
-  $("#create_table").on('click', () => {
-    if (root.length != 0) {
-      order_id = 0;
-      root.create_table("tree_table");
-    }
-    else alert("Array is empty")
-  })
+    $("#create_table").on('click', () => {
+      if (root.length != 0) {
+        order_id = 0;
+        root.create_table("tree_table");
+        $("#buffer_table").fadeTo(0, 1);
+        delay_count = 0;
+        let $tr = $("#tree_table > tr");
+        $tr.show();
+        let id = 0;
+        let spans_length = $('*[data-order_id]').length
+        // берем все TD с data-order_id (у пустых ячеек этого атрибута нет)
+        get_span(spans_length, 1);
+      }
+      else alert("Array is empty")
+    })
 
 
   $("#main_input").submit('submit', () => {
@@ -333,6 +330,8 @@
         // работаем с левой веткой и только если правый sibling тоже leaf
         if (this.branch == "left" && !this.sibling.has_children) {
           let tmp = []
+          $("#" + this.cell_id + "").css("background-color", "grey")
+          $("#" + this.sibling.cell_id + "").css("background-color", "silver")
 
           while (this.n_array.length != 0 && this.sibling.n_array != 0) {
             // пока какой-то из массивов не исчерпается 
