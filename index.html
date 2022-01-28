@@ -76,6 +76,8 @@
 
         <!--      <input id="btn_sort" type="button" class="btn btn-outline-primary btn-block" value="Merge sort">-->
 
+        <table id="buffer_table"><tr><td>&NoBreak;</td></tr></table>
+
         <button id="test_btn" class="btn btn-outline-info">TEST</button>
       </div>
 
@@ -100,17 +102,22 @@
   let tree_faidto_delay = 800;
   let order_id = 0;
 
+  $("#buffer_table").fadeTo(0,0);
+  
   $("#test_btn").on('click', () => {
+    $("#buffer_table").fadeTo(0,1);
     delay_count = 0;
     let $tr = $("#tree_table > tr");
     $tr.show();
     let id = 0;
+    let spans_length = $('*[data-order_id]').length
     // берем все TD с data-order_id (у пустых ячеек этого атрибута нет)
-    get_span($('*[data-order_id]').length, 1);
-
+    get_span(spans_length, 1);
   })
 
   let delay_count = 0;
+
+
 
   function get_span(length, id) {
     delay_count++;
@@ -264,7 +271,7 @@
       // если ячейка на этом уровне и с таким id не существует
       if (zzzz == 0) {
         // создаем таблицу, но не отображаем
-        $("tr#level" + this.level).append($("<td class='cell border' data-order_id='" + order_id + "' data-toggle='tooltip' data-placement='top' colspan='" + this.n_array.length + "' id='" + this.cell_id + "'><span>" + this.n_array.join("</span>,<span>") + "</span></td>").hide()).hide();
+        $("tr#level" + this.level).append($("<td class='cell border' data-order_id='" + order_id + "' colspan='" + this.n_array.length + "' id='" + this.cell_id + "'><span>" + this.n_array.join("</span>,<span>") + "</span>(" + order_id + ")</td>").hide()).hide();
       }
 
       if (this.n_array.length == 1 && (this.get_if_node_has_children(this.get_root(), this.level))) {
